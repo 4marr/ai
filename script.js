@@ -89,7 +89,6 @@ document.getElementById("modelSelect").addEventListener("change", () => {
 });
 
 let generateResponse = (incomingChatLi) => {
-    const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
     const messageElement = incomingChatLi.querySelector("p");
     chatInput.readOnly = true;
     chatInput.placeholder = 'Mohon tunggu...'
@@ -108,56 +107,154 @@ let generateResponse = (incomingChatLi) => {
     // Dapatkan model yang dipilih dari elemen select
     const selectedModel = document.getElementById("modelSelect").value;
 
-    // Siapkan payload yang berisi seluruh riwayat percakapan
-    const payload = {
-        id: chatId, // Gunakan id yang sama dari permintaan pertama
-        model: selectedModel, // Gunakan model yang dipilih
-        messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-        max_tokens: 512,
-        temperature: 0.3,
-        presence_penalty: 0.1,
-        frequency_penalty: 0.1,
-        top_p: 0.8,
-        top_k: 100
-    };
-    console.log(payload);
+    if (selectedModel === "gpt-4o-mini") {
+        // Endpoint dan method untuk model gpt-4o-mini
+        const randomString = Math.random().toString(36).substring(7);
+        const API_URL = `https://jsaea.cloud/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
-    // Kirim seluruh riwayat percakapan ke server
-    fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            "Accept": 'application/json',
-            "Content-Type": 'application/json',
-        },
-        body: JSON.stringify(payload),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            // Hapus <think>\n dari respons
-            let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
-            // Ganti teks yang diapit oleh ** dengan tag <strong>
-            cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            messageElement.innerHTML = cleanedResponse;
-            // Tambahkan respons asisten ke riwayat percakapan
-            addMessageToHistory('system', cleanedResponse);
-
-            // Simpan id dari API jika belum ada
-            if (!chatId) {
-                chatId = data.result.id;
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
             }
-            console.log("Updated Payload with ID:", payload);
         })
-        .catch(error => {
-            console.error('Error:', error);
-            console.log(payload)
-        }).finally(
-            () => {
-                chatBox.scrollTo(0, chatBox.scrollHeight)
-                chatInput.readOnly = false;
-                chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
+    } else if (selectedModel === "gpt-4o") {
+        // Endpoint dan method untuk model gpt-4o
+        const randomString = Math.random().toString(36).substring(7);
+        const API_URL = `https://jsaea.cloud/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
             }
-        );
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
+    } else if (selectedModel === "gpt-4") {
+        // Endpoint dan method untuk model gpt-4
+        const randomString = Math.random().toString(36).substring(7);
+        const API_URL = `https://jsaea.cloud/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
+    } else {
+        // Endpoint dan method untuk model lainnya
+        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
+        const payload = {
+            id: chatId, // Gunakan id yang sama dari permintaan pertama
+            model: selectedModel, // Gunakan model yang dipilih
+            messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
+            max_tokens: 512,
+            temperature: 0.3,
+            presence_penalty: 0.1,
+            frequency_penalty: 0.1,
+            top_p: 0.8,
+            top_k: 100
+        };
+        console.log(payload);
+
+        fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+
+                // Simpan id dari API jika belum ada
+                if (!chatId) {
+                    chatId = data.result.id;
+                }
+                console.log("Updated Payload with ID:", payload);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                console.log(payload)
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
+    }
 
     function addMessageToHistory(role, content) {
         conversationHistory = [{ role, content }]; // Ganti percakapan yang ada
