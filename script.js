@@ -77,6 +77,16 @@ const createChatLi = (message, className) => {
 }
 
 let chatId = null;
+let currentModel = document.getElementById("modelSelect").value;
+
+document.getElementById("modelSelect").addEventListener("change", () => {
+    const selectedModel = document.getElementById("modelSelect").value;
+    if (selectedModel !== currentModel) {
+        // Hapus riwayat percakapan sebelumnya
+        localStorage.removeItem('conversationHistory');
+        currentModel = selectedModel;
+    }
+});
 
 let generateResponse = (incomingChatLi) => {
     const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
@@ -95,16 +105,19 @@ let generateResponse = (incomingChatLi) => {
     // Tambahkan pesan pengguna ke riwayat percakapan
     addMessageToHistory("user", userMessage);
 
+    // Dapatkan model yang dipilih dari elemen select
+    const selectedModel = document.getElementById("modelSelect").value;
+
     // Siapkan payload yang berisi seluruh riwayat percakapan
     const payload = {
         id: chatId, // Gunakan id yang sama dari permintaan pertama
-        model: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+        model: selectedModel, // Gunakan model yang dipilih
         messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-        max_tokens: 128,
-        temperature: 0.9,
+        max_tokens: 512,
+        temperature: 0.3,
         presence_penalty: 0.1,
         frequency_penalty: 0.1,
-        top_p: 0.9,
+        top_p: 0.8,
         top_k: 100
     };
     console.log(payload);
@@ -121,9 +134,13 @@ let generateResponse = (incomingChatLi) => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            messageElement.innerHTML = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");;
+            // Hapus <think>\n dari respons
+            let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+            // Ganti teks yang diapit oleh ** dengan tag <strong>
+            cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            messageElement.innerHTML = cleanedResponse;
             // Tambahkan respons asisten ke riwayat percakapan
-            addMessageToHistory('system', data.result.choices[0].message.content);
+            addMessageToHistory('system', cleanedResponse);
 
             // Simpan id dari API jika belum ada
             if (!chatId) {
@@ -161,13 +178,11 @@ const handleChat = () => {
     chatInput.value = "";
 }
 
-sendChatBtn.addEventListener("click",
-    handleChat);
+sendChatBtn.addEventListener("click", handleChat);
 
 const paste = document.getElementById('paste-button');
 
-paste.addEventListener("click",
-    async () => {
-        const read = await navigator.clipboard.readText()
-        chatInput.value = read
-    })
+paste.addEventListener("click", async () => {
+    const read = await navigator.clipboard.readText()
+    chatInput.value = read
+})
