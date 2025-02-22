@@ -78,6 +78,7 @@ const createChatLi = (message, className) => {
 
 let chatId = null;
 let currentModel = document.getElementById("modelSelect").value;
+let randomString = Math.random().toString(36).substring(7); // Inisialisasi randomString sekali
 
 document.getElementById("modelSelect").addEventListener("change", () => {
     const selectedModel = document.getElementById("modelSelect").value;
@@ -85,6 +86,7 @@ document.getElementById("modelSelect").addEventListener("change", () => {
         // Hapus riwayat percakapan sebelumnya
         localStorage.removeItem('conversationHistory');
         currentModel = selectedModel;
+        randomString = Math.random().toString(36).substring(7); // Reset randomString saat model berubah
     }
 });
 
@@ -109,8 +111,7 @@ let generateResponse = (incomingChatLi) => {
 
     if (selectedModel === "gpt-4o-mini") {
         // Endpoint dan method untuk model gpt-4o-mini
-        const randomString = Math.random().toString(36).substring(7);
-        const API_URL = `https://jsaea.cloud/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -123,7 +124,7 @@ let generateResponse = (incomingChatLi) => {
             .then(data => {
                 console.log(data);
                 // Hapus <think>\n dari respons
-                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 messageElement.innerHTML = cleanedResponse;
@@ -141,8 +142,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4o") {
         // Endpoint dan method untuk model gpt-4o
-        const randomString = Math.random().toString(36).substring(7);
-        const API_URL = `https://jsaea.cloud/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -155,7 +155,7 @@ let generateResponse = (incomingChatLi) => {
             .then(data => {
                 console.log(data);
                 // Hapus <think>\n dari respons
-                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 messageElement.innerHTML = cleanedResponse;
@@ -173,8 +173,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4") {
         // Endpoint dan method untuk model gpt-4
-        const randomString = Math.random().toString(36).substring(7);
-        const API_URL = `https://jsaea.cloud/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -187,7 +186,7 @@ let generateResponse = (incomingChatLi) => {
             .then(data => {
                 console.log(data);
                 // Hapus <think>\n dari respons
-                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 messageElement.innerHTML = cleanedResponse;
