@@ -202,6 +202,87 @@ let generateResponse = (incomingChatLi) => {
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
+    } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-exp" || selectedModel === "google/gemini-flash-1.5") {
+        // Endpoint dan method untuk model gpt-4
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content;
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
+    } else if (selectedModel === "meta-llama/Meta-Llama-3.1-8B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-70B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-405B-Instruct") {
+        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/llama";
+        const payload = {
+            id: chatId, // Gunakan id yang sama dari permintaan pertama
+            model: selectedModel, // Gunakan model yang dipilih
+            messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
+            max_tokens: 128,
+            temperature: 0.3,
+            presence_penalty: 0.1,
+            frequency_penalty: 0.1,
+            top_p: 0.9,
+            top_k: 100
+        };
+        console.log(payload);
+
+        fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Hapus <think>\n dari respons
+                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messageElement.innerHTML = cleanedResponse;
+                // Tambahkan respons asisten ke riwayat percakapan
+                addMessageToHistory('system', cleanedResponse);
+
+                // Simpan id dari API jika belum ada
+                if (!chatId) {
+                    chatId = data.result.id;
+                }
+                console.log("Updated Payload with ID:", payload);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                console.log(payload)
+            }).finally(
+                () => {
+                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatInput.readOnly = false;
+                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
+                }
+            );
     } else {
         // Endpoint dan method untuk model lainnya
         const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
