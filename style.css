@@ -42,6 +42,11 @@ body {
     transition: ease 0.5s;
 }
 
+select {
+    border: none;
+    outline: none;
+}
+
 #loader {
     position: fixed;
     display: flex;
