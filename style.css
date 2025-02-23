@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /*Theme*/
 :root {
@@ -45,6 +45,14 @@ body {
 select {
     border: none;
     outline: none;
+    background-color: var(--background-color1);
+    color: var(--span-color);
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
+    font-style: normal;
+    font-weight: 400;
 }
 
 #loader {
@@ -86,35 +94,6 @@ select {
     -webkit-tap-highlight-color: transparent;
 }
 
-.contentFAQ {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: none;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.contentFAQ p {
-    color: var(--text-color);
-    margin: 20px 0;
-}
-
-.qA{
-    background: var(--background-input);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.buildVer {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    bottom: 5px;
-    font-size: 0.75rem;
-}
-
 p {
     font-family: "Poppins", sans-serif;
     font-style: normal;
@@ -122,7 +101,7 @@ p {
 }
 
 strong {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .chatBot {
@@ -140,7 +119,7 @@ strong {
     display: flex;
     justify-content: space-between;
     background: var(--header-background-color);
-    backdrop-filter: blur( 20px );
+    backdrop-filter: blur(20px);
     color: var(--text-color);
     padding: 12px 20px;
     z-index: 10;
@@ -168,7 +147,7 @@ strong {
     margin: 0;
 }
 
-.brand span{
+.brand span {
     color: var(--span-color);
 }
 
@@ -216,92 +195,9 @@ strong {
     border-radius: 10px 10px 10px 0;
 }
 
-li:nth-child(odd){
+li:nth-child(odd) {
     display: flex;
     align-items: flex-start;
-}
-
-.sparkle {
-    width: 20px;
-    filter: var(--invert--color);
-}
-
-.chatBox .incoming .welcome {
-    margin: 30px 0 0 0;
-    white-space: normal;
-    color: var(--welcome-text-color);
-    font-weight: 600;
-}
-
-.welcome span {
-    background: linear-gradient(90deg, rgba(64,93,230,1) 0%, rgba(131,58,180,1) 20%, rgba(225,48,108,1) 38%, rgba(64,93,230,1) 57%, rgba(131,58,180,1) 76%, rgba(225,48,108,1) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 250%;
-    animation: Gradient-ania 2s forwards;
-    animation-delay: 1s;
-}
-
-@keyframes Gradient-ania {
-    0% {
-        background-position: right;
-    } 100% {
-        background-position: left;
-    }
-}
-
-.saran {
-    width: 100%;
-    overflow-x: scroll;
-    scrollbar-color: transparent transparent;
-    scroll-snap-type: x mandatory;
-}
-
-.saran::-webkit-scrollbar {
-    display: none;
-}
-
-.chatBox > .saran > .container-saran {
-    display: flex;
-    overflow-y: hidden;
-    width: 1000px;
-    margin-top: 30px;
-}
-
-.chatBox > .saran > .container-saran > div {
-    position: relative;
-    cursor: pointer;
-    scroll-snap-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    padding: 10px 20px 50px 20px;
-    margin: 0 10px 0 0;
-    background: var(--background-div);
-    color: var(--text-color);
-}
-
-.chatBox > .saran > .container-saran > div:hover {
-    background: var(--background-div-hover);
-}
-
-.container-saran > div > .itemDesk {
-    font-size: 0.80rem;
-    font-weight: 400;
-    margin-top: 5px;
-}
-
-.container-saran > div > .itemHead {
-    font-size: 0.90rem;
-    margin-top: 5px;
-}
-
-.container-saran > div > span {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 0 10px 10px 0;
 }
 
 pre {
@@ -318,7 +214,6 @@ pre {
     /*background: var(--background-input);*/
     padding: 0 20px;
     margin: 0 0 20px 0;
-    border-top: 1px solid var(--background-color1);
     border-radius: 33px;
     overflow: hidden;
     box-sizing: border-box;

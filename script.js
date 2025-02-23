@@ -26,18 +26,6 @@ function initializeConversationHistory() {
 document.addEventListener('DOMContentLoaded', localStorage.clear());
 document.addEventListener('DOMContentLoaded', initializeConversationHistory);
 
-function back() {
-    window.open("/dashboard/Playground/index.html")
-}
-
-function faq() {
-    document.querySelector(".contentFAQ").style.display = "flex"
-}
-
-function closeFaq() {
-    document.querySelector(".contentFAQ").style.display = "none"
-}
-
 var iconTheme = document.getElementById("theme-button")
 function changeTheme() {
     document.body.classList.toggle("darkTheme")
@@ -94,6 +82,9 @@ let generateResponse = (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
     chatInput.readOnly = true;
     chatInput.placeholder = 'Mohon tunggu...'
+    var textarea = document.getElementById('message');
+    textarea.style.height = "50px";
+    textarea.style.borderRadius = "30px";
 
     let conversationHistory = [];
 
@@ -123,10 +114,13 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Hapus <think>\n dari respons
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
@@ -154,10 +148,13 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Hapus <think>\n dari respons
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
@@ -185,10 +182,13 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Hapus <think>\n dari respons
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
@@ -216,10 +216,13 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Hapus <think>\n dari respons
                 let cleanedResponse = data.result.choices[0].message.content;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
@@ -259,10 +262,13 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Hapus <think>\n dari respons
-                let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
+                let cleanedResponse = data.result.choices[0].message.content;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
@@ -314,6 +320,10 @@ let generateResponse = (incomingChatLi) => {
                 let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = cleanedResponse;
                 // Tambahkan respons asisten ke riwayat percakapan
                 addMessageToHistory('system', cleanedResponse);
