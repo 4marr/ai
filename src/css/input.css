@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+    --breakpoint-3xl: 1920px;
+    --color-l-base: #eff1f5;
+    --color-l-on-base: #4c4f69;
+    --color-d-base: #111215;
+    --color-d-on-base: rgb(156 163 175);
+    --color-avocado-500: oklch(0.84 0.18 117.33);
+    --color-avocado-600: oklch(0.53 0.12 118.34);
+    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+    /* ... */
+  }

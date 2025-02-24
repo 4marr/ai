@@ -26,15 +26,74 @@ function initializeConversationHistory() {
 document.addEventListener('DOMContentLoaded', localStorage.clear());
 document.addEventListener('DOMContentLoaded', initializeConversationHistory);
 
-var iconTheme = document.getElementById("theme-button")
+//theme
 function changeTheme() {
-    document.body.classList.toggle("darkTheme")
-    if (document.body.classList.contains("darkTheme")) {
-        iconTheme.innerText = "light_mode";
+    const element = document.documentElement
+    const theme = element.classList.contains("dark") ? "light" : "dark"
+
+    const css = document.createElement("style")
+
+    css.appendChild(
+        document.createTextNode(
+            `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }`,
+        ),
+    )
+    document.head.appendChild(css)
+
+    if (theme === "dark") {
+        element.classList.add("dark")
     } else {
-        iconTheme.innerText = "dark_mode";
+        element.classList.remove("dark")
     }
+
+    window.getComputedStyle(css).opacity
+    document.head.removeChild(css)
+    localStorage.theme = theme
 }
+
+function preloadTheme() {
+    const theme = (() => {
+        const userTheme = localStorage.theme
+
+        if (userTheme === "light" || userTheme === "dark") {
+            return userTheme
+        } else {
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+        }
+    })()
+
+    const element = document.documentElement
+
+    if (theme === "dark") {
+        element.classList.add("dark")
+    } else {
+        element.classList.remove("dark")
+    }
+    localStorage.theme = theme
+}
+
+window.onload = () => {
+    function initializeThemeButtons() {
+        const headerThemeButton = document.getElementById("header-theme-button")
+        const drawerThemeButton = document.getElementById("drawer-theme-button")
+        headerThemeButton?.addEventListener("click", changeTheme)
+        drawerThemeButton?.addEventListener("click", changeTheme)
+    }
+
+    document.addEventListener("astro:after-swap", initializeThemeButtons)
+    initializeThemeButtons()
+}
+
+document.addEventListener("astro:after-swap", preloadTheme)
+
+preloadTheme()
+
 
 var textarea = document.getElementById('message');
 textarea.addEventListener("input", e => {
@@ -58,7 +117,7 @@ let userMessage;
 const createChatLi = (message, className) => {
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", className)
-    let chatContent = className === "outgoing" ? `<p></p>` : `<pre><p></p></pre>`
+    let chatContent = className === "outgoing" ? `<p class="text-sm text-l-base bg-d-base py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
@@ -242,7 +301,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 128,
+            max_tokens: 512,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -300,7 +359,7 @@ let generateResponse = (incomingChatLi) => {
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
-            top_p: 0.8,
+            top_p: 0.9,
             top_k: 100
         };
         console.log(payload);

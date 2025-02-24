@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#loader {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 101;
+    background-color: var(--background-color1);
+}
+#loader:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid white;
+    border-color: white transparent white transparent;
+    animation: searah 1.2s linear infinite;
+}
+
+@keyframes searah {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+p {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 700;
+}
+
+pre {
+    display: block;
+    white-space: pre-wrap;
+}
+.outgoing {
+    display: flex;
+    justify-content: flex-end;
+}
+.incoming {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.chat-input {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    /*background: var(--background-input);*/
+    padding: 50px 20px 0 20px;
+    margin: 0 0 10px 0;
+    border-radius: 33px;
+    overflow: hidden;
+    box-sizing: border-box;
+    gap: 5px;
+}
+
+.chat-input textarea {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    font-style: normal;
+    height: 50px;
+    max-height: 150px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 0.85rem;
+    resize: none;
+    padding: 15px 15px 15px 15px;
+    border-radius: 30px;
+    scrollbar-color: transparent transparent;
+}
+
+.chat-input textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-input textarea::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    text-wrap: nowrap;
+}
+
+.chat-input #send-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    min-width: 45px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.chat-input textarea:valid ~ #send-button {
+    display: flex;
+}
+
+.chat-input #paste-button {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.chat-input textarea:valid ~ #paste-button {
+    display: none;
+}
