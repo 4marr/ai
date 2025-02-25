@@ -70,7 +70,7 @@ pre {
     display: flex;
     align-items: flex-end;
     /*background: var(--background-input);*/
-    padding: 50px 20px 0 20px;
+    padding: 100px 20px 0 20px;
     margin: 0 0 10px 0;
     border-radius: 33px;
     overflow: hidden;

@@ -117,7 +117,7 @@ let userMessage;
 const createChatLi = (message, className) => {
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", className)
-    let chatContent = className === "outgoing" ? `<p class="text-sm text-l-base bg-d-base py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
+    let chatContent = className === "outgoing" ? `<p class="text-sm text-l-base bg-d-base dark:bg-gray-800 py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
@@ -186,6 +186,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
@@ -220,6 +221,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
@@ -254,6 +256,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
@@ -288,6 +291,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
@@ -340,7 +344,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                console.log(payload)
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
@@ -395,7 +399,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                console.log(payload)
+                messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
                     chatBox.scrollTo(0, chatBox.scrollHeight)
