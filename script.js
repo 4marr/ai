@@ -180,9 +180,8 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
-                // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -215,9 +214,8 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
-                // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -250,9 +248,8 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
-                // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -285,9 +282,8 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
-                // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -325,6 +321,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                let response = data.result.choices[0].message.content;
                 let cleanedResponse = data.result.choices[0].message.content;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -332,9 +329,10 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
                 // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                addMessageToHistory('system', response);
 
                 // Simpan id dari API jika belum ada
                 if (!chatId) {
@@ -379,6 +377,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                let response = data.result.choices[0].message.content;
                 // Hapus <think>\n dari respons
                 let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
@@ -387,9 +386,10 @@ let generateResponse = (incomingChatLi) => {
                 cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
-                messageElement.innerHTML = cleanedResponse;
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
                 // Tambahkan respons asisten ke riwayat percakapan
-                addMessageToHistory('system', cleanedResponse);
+                addMessageToHistory('system', response);
 
                 // Simpan id dari API jika belum ada
                 if (!chatId) {
@@ -413,6 +413,19 @@ let generateResponse = (incomingChatLi) => {
         conversationHistory = [{ role, content }]; // Ganti percakapan yang ada
         localStorage.setItem('conversationHistory', JSON.stringify(conversationHistory));
     }
+}
+
+function typeText(element, text, delay = 50) {
+    const words = text.split(' ');
+    let index = 0;
+    function type() {
+        if (index < words.length) {
+            element.innerHTML += words[index] + ' ';
+            index++;
+            setTimeout(type, delay);
+        }
+    }
+    type();
 }
 
 const handleChat = () => {
