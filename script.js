@@ -422,6 +422,7 @@ function typeText(element, text, delay = 50) {
         if (index < words.length) {
             element.innerHTML += words[index] + ' ';
             index++;
+            chatBox.scrollTo(0, chatBox.scrollHeight); // Tambahkan ini untuk menggulir setelah setiap kata ditambahkan
             setTimeout(type, delay);
         }
     }
@@ -433,6 +434,8 @@ const handleChat = () => {
     if (!userMessage) return;
     chatBox.appendChild(createChatLi(userMessage, "outgoing"));
     chatBox.scrollTo(0, chatBox.scrollHeight)
+    console.log(chatBox);
+
 
     const incomingChatLi = createChatLi("...", "incoming");
     chatBox.appendChild(incomingChatLi);

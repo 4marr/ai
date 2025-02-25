@@ -165,7 +165,6 @@ strong {
 .chatBot .chatBox {
     height: 90.5%;
     overflow-y: auto;
-    padding: 56px 20px 10px;
 }
 
 .chatBox .chat {
