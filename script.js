@@ -145,6 +145,16 @@ let generateResponse = (incomingChatLi) => {
     textarea.style.height = "50px";
     textarea.style.borderRadius = "30px";
 
+    let skeleton = `
+            <div class="div-skeleton h-full absolute top-0 left-0">
+                <div class="skeleton" style="width: 90%;"></div>
+                <div class="skeleton" style="width: 75%;"></div>
+                <div class="skeleton" style="width: 80%;"></div>
+                <div class="skeleton" style="width: 70%;"></div>
+            </div>
+    `
+    incomingChatLi.insertAdjacentHTML("beforeend", skeleton);
+
     let conversationHistory = [];
 
     // Cek apakah ada riwayat percakapan di localStorage
@@ -173,6 +183,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -185,6 +196,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -207,6 +219,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -219,6 +232,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -241,6 +255,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -253,6 +268,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -275,6 +291,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let cleanedResponse = data.result.choices[0].message.content;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -287,6 +304,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -321,6 +339,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let response = data.result.choices[0].message.content;
                 let cleanedResponse = data.result.choices[0].message.content;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
@@ -342,6 +361,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -377,6 +397,7 @@ let generateResponse = (incomingChatLi) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                document.querySelector(".div-skeleton").remove();
                 let response = data.result.choices[0].message.content;
                 // Hapus <think>\n dari respons
                 let cleanedResponse = data.result.choices[0].message.content.replace("<think>\n\n</think>\n\n", "");
@@ -399,6 +420,7 @@ let generateResponse = (incomingChatLi) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
@@ -415,7 +437,7 @@ let generateResponse = (incomingChatLi) => {
     }
 }
 
-function typeText(element, text, delay = 50) {
+function typeText(element, text, delay = 20) {
     const words = text.split(' ');
     let index = 0;
     function type() {
@@ -433,14 +455,14 @@ const handleChat = () => {
     userMessage = chatInput.value.trim();
     if (!userMessage) return;
     chatBox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatBox.scrollTo(0, chatBox.scrollHeight)
+    chatBox.scrollTo(0, chatBox.scrollHeight);
     console.log(chatBox);
 
-
-    const incomingChatLi = createChatLi("...", "incoming");
+    const incomingChatLi = createChatLi("", "incoming");
+    incomingChatLi.style.position = "relative"; // Tambahkan ini untuk memastikan skeleton loader dapat menimpa
     chatBox.appendChild(incomingChatLi);
-    chatBox.scrollTo(0, chatBox.scrollHeight)
-    generateResponse(incomingChatLi)
+    chatBox.scrollTo(0, chatBox.scrollHeight);
+    generateResponse(incomingChatLi);
     chatInput.value = "";
 }
 

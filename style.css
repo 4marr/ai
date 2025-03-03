@@ -162,9 +162,10 @@ strong {
     -webkit-tap-highlight-color: transparent;
 }
 
-.chatBot .chatBox {
-    height: 90.5%;
+.chatBox {
+    padding-bottom: 200px;
     overflow-y: auto;
+    margin-bottom: 100px;
 }
 
 .chatBox .chat {
