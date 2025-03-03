@@ -111,6 +111,7 @@ textarea.addEventListener("input", e => {
 let chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input i");
 const chatBox = document.querySelector(".chatBox");
+const chatSection = document.querySelector(".chatSection");
 
 let userMessage;
 
@@ -144,6 +145,9 @@ let generateResponse = (incomingChatLi) => {
     var textarea = document.getElementById('message');
     textarea.style.height = "50px";
     textarea.style.borderRadius = "30px";
+
+    chatBox.style.paddingBottom = "250px";
+    chatSection.scrollTo(0, chatSection.scrollHeight)
 
     let skeleton = `
             <div class="div-skeleton h-full absolute top-0 left-0">
@@ -200,7 +204,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -236,7 +240,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -272,7 +276,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -308,7 +312,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -365,7 +369,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -424,7 +428,7 @@ let generateResponse = (incomingChatLi) => {
                 messageElement.innerHTML = "Something went wrong."
             }).finally(
                 () => {
-                    chatBox.scrollTo(0, chatBox.scrollHeight)
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
                     chatInput.readOnly = false;
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
@@ -438,13 +442,14 @@ let generateResponse = (incomingChatLi) => {
 }
 
 function typeText(element, text, delay = 20) {
+    chatBox.style.paddingBottom = "150px";
     const words = text.split(' ');
     let index = 0;
     function type() {
         if (index < words.length) {
             element.innerHTML += words[index] + ' ';
             index++;
-            chatBox.scrollTo(0, chatBox.scrollHeight); // Tambahkan ini untuk menggulir setelah setiap kata ditambahkan
+            chatSection.scrollTo(0, chatSection.scrollHeight); // Tambahkan ini untuk menggulir setelah setiap kata ditambahkan
             setTimeout(type, delay);
         }
     }
@@ -455,13 +460,13 @@ const handleChat = () => {
     userMessage = chatInput.value.trim();
     if (!userMessage) return;
     chatBox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatBox.scrollTo(0, chatBox.scrollHeight);
+    chatSection.scrollTo(0, chatSection.scrollHeight);
     console.log(chatBox);
 
     const incomingChatLi = createChatLi("", "incoming");
     incomingChatLi.style.position = "relative"; // Tambahkan ini untuk memastikan skeleton loader dapat menimpa
     chatBox.appendChild(incomingChatLi);
-    chatBox.scrollTo(0, chatBox.scrollHeight);
+    chatSection.scrollTo(0, chatSection.scrollHeight);
     generateResponse(incomingChatLi);
     chatInput.value = "";
 }
