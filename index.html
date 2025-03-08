@@ -70,20 +70,38 @@
     </header>
     <main class="overflow-hidden">
         <section class="chatSection flex items-center justify-center overflow-y-auto">
-            <div class="flex h-screen w-full">
+            <div class="flex w-full mt-20">
                 <div class="w-full">
-                    <ul class="chatBox mt-20 px-5 flex flex-col gap-4">
+                    <ul class="chatBox px-5 flex flex-col gap-4">
+                        <div class="flex justify-center items-center gap-2 text-2xl font-bold h-[60vh]" id="welcome">
+                            <h2>hello,</h2>
+                            <input type="text" id="name" value="stranger" class="outline-0 w-full">
+                        </div>
                     </ul>
                 </div>
             </div>
             <div
                 class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-20%">
                 <div class="chat-input">
-                    <textarea type="text" id="message" class="bg-gray-200 dark:bg-gray-800 text-d-base dark:text-l-base"
-                        placeholder="Masukkan pertanyaanmu disini..." required=""></textarea>
+                    <div class="flex w-full justify-start rounded bg-gray-200 dark:bg-gray-800"
+                        style="border-radius: 50px;" id="message-container">
+                        <form id="image-upload-form" style="display: none;">
+                            <label for="image-upload" style="cursor: pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2"
+                                        d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8" />
+                                </svg>
+                            </label>
+
+                            <!-- Hidden file input -->
+                            <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                        </form>
+                        <textarea type="text" id="message" class=" text-d-base dark:text-l-base"
+                            placeholder="Masukkan pertanyaanmu disini..." required=""></textarea>
+                    </div>
                     <i id="send-button"
                         class="bx bx-up-arrow-alt bg-d-base text-l-base dark:bg-l-base dark:text-d-base"></i>
-                    <span id="paste-button" class="material-symbols-outlined">content_paste</span>
                 </div>
                 <div class="text-center bottom-0 w-full px-5 pb-2">
                     <p class="text-[0.60rem] text-d-base/75 dark:text-l-base/75">

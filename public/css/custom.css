@@ -84,7 +84,16 @@ pre {
 
 .outgoing {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.outgoing img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 0 0 10px 0;
 }
 
 .incoming {
@@ -92,6 +101,7 @@ pre {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 80%;
 }
 
 .chatBox {
@@ -113,7 +123,7 @@ pre {
     gap: 5px;
 }
 
-.chat-input textarea {
+.chat-input #message-container textarea {
     font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
@@ -130,17 +140,17 @@ pre {
     scrollbar-color: transparent transparent;
 }
 
-.chat-input textarea::-webkit-scrollbar {
+.chat-input #message-container textarea::-webkit-scrollbar {
     display: none;
 }
 
-.chat-input textarea::placeholder {
+.chat-input #message-container textarea::placeholder {
     font-family: "Poppins", sans-serif;
     font-style: normal;
     text-wrap: nowrap;
 }
 
-.chat-input #send-button {
+.chat-input #message-container #image-upload-form {
     display: none;
     align-items: center;
     justify-content: center;
@@ -151,9 +161,16 @@ pre {
     border-radius: 50%;
     -webkit-tap-highlight-color: transparent;
 }
-
-.chat-input textarea:valid ~ #send-button {
+.chat-input  #send-button {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    min-width: 45px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .chat-input #paste-button {
@@ -165,8 +182,4 @@ pre {
     font-size: 1.5rem;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-}
-
-.chat-input textarea:valid ~ #paste-button {
-    display: none;
 }

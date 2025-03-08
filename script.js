@@ -4,6 +4,20 @@ window.addEventListener('load', function () {
     loader.style.display = 'none';
 });
 
+const textareas = document.getElementById('message');
+const sendButton = document.getElementById('send-button');
+
+textareas.addEventListener('input', () => {
+    if (textareas.validity.valid) {
+        sendButton.classList.remove('bg-d-base/50', 'dark:bg-gray-800/50');
+        sendButton.classList.add('bg-d-base', 'dark:bg-gray-800');
+    } else {
+        sendButton.classList.add('bg-d-base/50', 'dark:bg-gray-800/50');
+        sendButton.classList.remove('bg-d-base', 'dark:bg-gray-800');
+    }
+});
+
+
 // Fungsi untuk menginisialisasi riwayat percakapan
 function initializeConversationHistory() {
     let conversationHistory = [];
@@ -102,9 +116,9 @@ textarea.addEventListener("input", e => {
     textarea.style.height = height + 'px';
 
     if (height > 70) {
-        textarea.style.borderRadius = "15px";
+        document.getElementById('message-container').style.borderRadius = "15px";
     } else {
-        textarea.style.borderRadius = "30px";
+        document.getElementById('message-container').style.borderRadius = "30px";
     }
 })
 
@@ -118,7 +132,13 @@ let userMessage;
 const createChatLi = (message, className) => {
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", className)
-    let chatContent = className === "outgoing" ? `<p class="text-sm text-l-base bg-d-base dark:bg-gray-800 py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
+    let chatContent;
+    const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
+    if (uploadedImageUrl) {
+        chatContent = className === "outgoing" ? `<img src="${uploadedImageUrl}" alt=""><p class="text-sm text-l-base bg-d-base dark:bg-gray-800 py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
+    } else {
+        chatContent = className === "outgoing" ? `<p class="text-sm text-l-base bg-d-base dark:bg-gray-800 py-3 px-4 rounded-t-lg rounded-bl-lg max-w-80"></p>` : `<pre><p class="text-sm"></p></pre>`
+    }
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
@@ -138,7 +158,60 @@ document.getElementById("modelSelect").addEventListener("change", () => {
     }
 });
 
+document.getElementById("image-upload").addEventListener("change", async () => {
+    const fileInput = document.getElementById("image-upload");
+    const file = fileInput.files[0];
+    console.log("hai");
+
+
+    // Langsung melakukan try-catch jika file terpilih
+    if (file) {
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("https://api.ryzendesu.vip/api/uploader/ryzencdn", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.url) {
+                console.log("Image uploaded successfully:", data.url);
+                // Store the image URL in localStorage
+                localStorage.setItem("uploadedImageUrl", data.url);
+            } else {
+                console.error("Failed to get image URL from response");
+            }
+        } catch (error) {
+            console.error("Image upload failed:", error);
+        }
+    } else {
+        console.error("No file selected.");
+    }
+});
+
+let modelSelect = document.getElementById("modelSelect");
+
+modelSelect.addEventListener("change", () => {
+    const selectedModel = modelSelect.value;  // Ambil nilai yang dipilih dari dropdown
+
+    console.log("Model selected:", selectedModel);  // Menampilkan model yang dipilih untuk debug
+
+    if (selectedModel === "google/gemini-2.0-flash-001" ||
+        selectedModel === "google/gemini-flash-1.5-8b" ||
+        selectedModel === "google/gemini-flash-1.5-8b-exp" ||
+        selectedModel === "google/gemini-flash-1.5") {
+
+        document.getElementById("image-upload-form").style.display = "flex";  // Menampilkan form upload gambar
+    } else {
+        document.getElementById("image-upload-form").style.display = "none";
+    }
+});
+
 let generateResponse = (incomingChatLi) => {
+    document.getElementById("welcome").classList.add("hidden");
     const messageElement = incomingChatLi.querySelector("p");
     chatInput.readOnly = true;
     chatInput.placeholder = 'Mohon tunggu...'
@@ -175,7 +248,7 @@ let generateResponse = (incomingChatLi) => {
 
     if (selectedModel === "gpt-4o-mini") {
         // Endpoint dan method untuk model gpt-4o-mini
-        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -211,7 +284,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4o") {
         // Endpoint dan method untuk model gpt-4o
-        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -247,7 +320,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4") {
         // Endpoint dan method untuk model gpt-4
-        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -281,10 +354,16 @@ let generateResponse = (incomingChatLi) => {
                     chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
-    } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-exp" || selectedModel === "google/gemini-flash-1.5") {
-        // Endpoint dan method untuk model gpt-4
-        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
-
+    } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-8b-exp" || selectedModel === "google/gemini-flash-1.5") {
+        console.log("haiya");
+        let API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+        const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
+        if (uploadedImageUrl) {
+            API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&imageUrl=${uploadedImageUrl}&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+            localStorage.removeItem("uploadedImageUrl");
+        } else {
+            API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+        }
         fetch(API_URL, {
             method: 'GET',
             headers: {
@@ -318,7 +397,7 @@ let generateResponse = (incomingChatLi) => {
                 }
             );
     } else if (selectedModel === "meta-llama/Meta-Llama-3.1-8B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-70B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-405B-Instruct") {
-        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/llama";
+        const API_URL = "https://fastrestapis.fasturl.link/aillm/llama";
         const payload = {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
@@ -376,7 +455,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else {
         // Endpoint dan method untuk model lainnya
-        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
+        const API_URL = "https://fastrestapis.fasturl.link/aillm/deepseek";
         const payload = {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
@@ -472,10 +551,3 @@ const handleChat = () => {
 }
 
 sendChatBtn.addEventListener("click", handleChat);
-
-const paste = document.getElementById('paste-button');
-
-paste.addEventListener("click", async () => {
-    const read = await navigator.clipboard.readText()
-    chatInput.value = read
-})
