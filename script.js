@@ -426,7 +426,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 512,
+            max_tokens: 128,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -484,7 +484,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 512,
+            max_tokens: 128,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -548,16 +548,20 @@ function typeText(element, text, delay = 20) {
     chatBox.style.paddingBottom = "150px";
     const words = text.split(' ');
     let index = 0;
+    let currentHTML = ''; // Simpan HTML yang telah dimasukkan
+
     function type() {
         if (index < words.length) {
-            element.innerHTML += words[index] + ' ';
+            currentHTML += words[index] + ' '; // Menambahkan kata ke HTML sementara
+            element.innerHTML = currentHTML; // Update innerHTML setelah semua kata ditambahkan
             index++;
-            chatSection.scrollTo(0, chatSection.scrollHeight); // Tambahkan ini untuk menggulir setelah setiap kata ditambahkan
+            chatSection.scrollTo(0, chatSection.scrollHeight); // Menyulap setelah setiap kata
             setTimeout(type, delay);
         }
     }
     type();
 }
+
 
 const handleChat = () => {
     userMessage = chatInput.value.trim();
