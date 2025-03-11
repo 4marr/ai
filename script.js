@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
 const textareas = document.getElementById('message');
 const sendButton = document.getElementById('send-button');
 
-textareas.addEventListener('input', () => {
+setInterval(() => {
     if (textareas.validity.valid) {
         sendButton.classList.remove('bg-d-base/50', 'dark:bg-gray-800/50');
         sendButton.classList.add('bg-d-base', 'dark:bg-gray-800');
@@ -15,7 +15,8 @@ textareas.addEventListener('input', () => {
         sendButton.classList.add('bg-d-base/50', 'dark:bg-gray-800/50');
         sendButton.classList.remove('bg-d-base', 'dark:bg-gray-800');
     }
-});
+}, 100); // Check every 100 milliseconds (adjust timing as needed)
+
 
 
 // Fungsi untuk menginisialisasi riwayat percakapan
@@ -161,6 +162,13 @@ document.getElementById("modelSelect").addEventListener("change", () => {
 document.getElementById("image-upload").addEventListener("change", async () => {
     const fileInput = document.getElementById("image-upload");
     const file = fileInput.files[0];
+    let imageContainer = document.getElementById("image-container");
+    let image = document.getElementById("image");
+    let imageStatus = document.getElementById("image-status");
+    imageContainer.classList.remove("hidden");
+    imageContainer.classList.add("flex");
+    image.src = URL.createObjectURL(file);
+    imageStatus.textContent = "loading to upload...";
     console.log("hai");
 
 
@@ -170,27 +178,40 @@ document.getElementById("image-upload").addEventListener("change", async () => {
             const formData = new FormData();
             formData.append("file", file);
 
-            const response = await fetch("https://api.ryzendesu.vip/api/uploader/ryzencdn", {
+            const response = await fetch("https://fastrestapis.fasturl.cloud/downup/uploader-v2", {
                 method: "POST",
                 body: formData,
             });
 
             const data = await response.json();
 
-            if (data.url) {
-                console.log("Image uploaded successfully:", data.url);
+            if (data.result) {
+                console.log("Image uploaded successfully:", data.result);
                 // Store the image URL in localStorage
-                localStorage.setItem("uploadedImageUrl", data.url);
+                localStorage.setItem("uploadedImageUrl", data.result);
+                imageStatus.textContent = "Image uploaded successfully!";
             } else {
                 console.error("Failed to get image URL from response");
+                imageStatus.textContent = "Image upload failed.";
             }
         } catch (error) {
             console.error("Image upload failed:", error);
+            imageStatus.textContent = "Image upload failed.";
         }
     } else {
         console.error("No file selected.");
     }
 });
+
+function removeImage() {
+    const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
+    if (uploadedImageUrl) {
+        localStorage.removeItem("uploadedImageUrl");
+    }
+    let imageContainer = document.getElementById("image-container");
+    imageContainer.classList.remove("flex");
+    imageContainer.classList.add("hidden");
+}
 
 let modelSelect = document.getElementById("modelSelect");
 
@@ -211,6 +232,9 @@ modelSelect.addEventListener("change", () => {
 });
 
 let generateResponse = (incomingChatLi) => {
+    let imageContainer = document.getElementById("image-container");
+    imageContainer.classList.remove("flex");
+    imageContainer.classList.add("hidden");
     document.getElementById("welcome").classList.add("hidden");
     const messageElement = incomingChatLi.querySelector("p");
     chatInput.readOnly = true;

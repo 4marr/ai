@@ -23,12 +23,12 @@
     <header id="header" class="fixed top-0 w-full h-16 z-50 bg-l-base dark:bg-d-base">
         <div class="full h-full mx-auto px-5">
             <div class="relative flex justify-between items-center h-full w-full">
-                <div class="flex gap-1 font-bold text-sm">
+                <div class="font-bold text-sm">
                     <a href="/"
-                        class="flex items-center gap-1 text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-xl">
+                        class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
                         <h2>ARCHAI</h2>
                     </a>
-                    <select id="modelSelect" class="outline-0 text-xs">
+                    <select id="modelSelect" class="outline-0 text-xs font-normal">
                         <option value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</option>
                         <option value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">DeepSeek-R1-Distill-Llama-70B</option>
                         <option value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</option>
@@ -74,14 +74,24 @@
                 <div class="w-full">
                     <ul class="chatBox px-5 flex flex-col gap-4">
                         <div class="flex justify-center items-center gap-2 text-2xl font-bold h-[60vh]" id="welcome">
-                            <h2>hello,</h2>
-                            <input type="text" id="name" value="stranger" class="outline-0 w-full">
+                            <h2 class="text-center flex">hello, &nbsp;<span contenteditable="true" class="outline-0 me-1">stranger</span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14 3v2H5v14h14v-9h2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm5.94.354l.707.707a.5.5 0 0 1 0 .707L11.314 14.1l-1.992.98a.3.3 0 0 1-.402-.402l.98-1.992l9.333-9.333a.5.5 0 0 1 .707 0z" stroke-width="0.5" stroke="currentColor"/></svg></h2>
                         </div>
                     </ul>
                 </div>
             </div>
             <div
                 class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-20%">
+                <div id="image-container" class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
+                    <div class="flex items-center gap-2">
+                        <img src="" alt="image" id="image" class="max-w-14 rounded">
+                        <p class="text-xs" id="image-status"></p>
+                    </div>
+                    <div>
+                        <button onclick="removeImage()" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l2.9 2.9q.275.275.7.275t.7-.275t.275-.7t-.275-.7L13.4 12l2.9-2.9q.275-.275.275-.7t-.275-.7t-.7-.275t-.7.275L12 10.6L9.1 7.7q-.275-.275-.7-.275t-.7.275t-.275.7t.275.7l2.9 2.9l-2.9 2.9q-.275.275-.275.7t.275.7t.7.275t.7-.275zm0 8.6q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8" stroke-width="0.5" stroke="currentColor"/></svg>
+                        </button>
+                    </div>
+                </div>
                 <div class="chat-input">
                     <div class="flex w-full justify-start rounded bg-gray-200 dark:bg-gray-800"
                         style="border-radius: 50px;" id="message-container">
