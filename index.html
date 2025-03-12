@@ -19,11 +19,18 @@
 </head>
 
 <body class="dark:bg-d-base dark:text-d-on-base bg-l-base text-l-on-base">
-    <div id="loader"></div>
     <header id="header" class="fixed top-0 w-full h-16 z-50 bg-l-base dark:bg-d-base">
         <div class="full h-full mx-auto px-5">
             <div class="relative flex justify-between items-center h-full w-full">
-                <div class="font-bold text-sm">
+                <div class="flex items-center gap-4 font-bold text-sm">
+                    <div class="buttons">
+                        <button id="header-drawer-button" aria-label="Toggle drawer open and closed"
+                            class="flex xl:hidden size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-white/20 stroke-current hover:stroke-white ">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-open" class="size-full stroke-current" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z" stroke-width="0.5" stroke="currentColor"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-close" class="size-full stroke-current" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.758 17.243L12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"/></svg>
+                        </button>
+                    </div>
+                    <div>
                     <a href="/"
                         class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
                         <h2>ARCHAI</h2>
@@ -44,6 +51,7 @@
                         <option value="meta-llama/Meta-Llama-3.1-405B-Instruct">Meta-Llama-3.1-405B-Instruct</option>
                     </select>
                 </div>
+            </div>
                 <div class="">
                     <nav
                         class="flex items-center justify-center text-sm gap-4 font-semibold text-l-on-base dark:text-d-on-base">
@@ -68,9 +76,20 @@
             </div>
         </div>
     </header>
+    <div id="drawer"
+        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
+        <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
+            <a href="/ai"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">ChatBot
+            </a>
+            <a href="/sstocode"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Screenshot to Code
+            </a>
+        </nav>
+    </div>
     <main class="overflow-hidden">
         <section class="chatSection flex items-center justify-center overflow-y-auto">
-            <div class="flex w-full mt-20">
+            <div class="flex w-full mt-20 h-[85vh]">
                 <div class="w-full">
                     <ul class="chatBox px-5 mb-20 flex flex-col gap-4">
                         <div class="flex justify-center items-center gap-2 text-2xl font-bold h-[60vh]" id="welcome">
@@ -80,7 +99,7 @@
                 </div>
             </div>
             <div
-                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-30%">
+                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15%">
                 <div id="image-container" class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
                     <div class="flex items-center gap-2">
                         <img src="" alt="image" id="image" class="max-w-14 max-h-14 object-cover rounded">
@@ -93,7 +112,7 @@
                     </div>
                 </div>
                 <div class="chat-input">
-                    <div class="flex w-full justify-start rounded bg-gray-200 dark:bg-gray-800"
+                    <div class="flex w-full justify-start rounded border border-gray-400 dark:border-gray-600"
                         style="border-radius: 50px;" id="message-container">
                         <form id="image-upload-form" style="display: none;">
                             <label for="image-upload" style="cursor: pointer;">
@@ -107,7 +126,7 @@
                             <!-- Hidden file input -->
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </form>
-                        <textarea type="text" id="message" class=" text-d-base dark:text-l-base"
+                        <textarea type="text" id="message" class="placeholder:text-current/50 text-d-base dark:text-l-base"
                             placeholder="Masukkan pertanyaanmu disini..." required=""></textarea>
                     </div>
                     <i id="send-button"

@@ -1,7 +1,9 @@
-var loader = document.getElementById('loader');
+const drawer = document.getElementById("drawer")
+const drawerButton = document.getElementById("header-drawer-button")
 
-window.addEventListener('load', function () {
-    loader.style.display = 'none';
+drawerButton.addEventListener('click', function () {
+    drawer.classList.toggle('open');
+    drawerButton.classList.toggle('open');
 });
 
 const textareas = document.getElementById('message');
@@ -237,11 +239,9 @@ let generateResponse = (incomingChatLi) => {
     imageContainer.classList.add("hidden");
     document.getElementById("welcome").classList.add("hidden");
     const messageElement = incomingChatLi.querySelector("p");
-    chatInput.readOnly = true;
-    chatInput.placeholder = 'Mohon tunggu...'
     var textarea = document.getElementById('message');
     textarea.style.height = "50px";
-    textarea.style.borderRadius = "30px";
+    document.getElementById('message-container').style.borderRadius = "30px";
 
     chatBox.style.paddingBottom = "250px";
     chatSection.scrollTo(0, chatSection.scrollHeight)
@@ -302,8 +302,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     } else if (selectedModel === "gpt-4o") {
@@ -338,8 +336,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     } else if (selectedModel === "gpt-4") {
@@ -374,8 +370,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-8b-exp" || selectedModel === "google/gemini-flash-1.5") {
@@ -416,8 +410,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     } else if (selectedModel === "meta-llama/Meta-Llama-3.1-8B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-70B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-405B-Instruct") {
@@ -473,8 +465,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     } else {
@@ -532,8 +522,6 @@ let generateResponse = (incomingChatLi) => {
             }).finally(
                 () => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
-                    chatInput.readOnly = false;
-                    chatInput.placeholder = 'Masukkan pertanyaanmu disini...';
                 }
             );
     }

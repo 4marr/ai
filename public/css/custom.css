@@ -21,6 +21,7 @@ code {
     z-index: 101;
     background-color: var(--background-color1);
 }
+
 #loader:after {
     content: " ";
     display: block;
@@ -37,6 +38,7 @@ code {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -64,14 +66,17 @@ strong {
     background-position: 200% center;
     animation: skeleton-loading 1.5s infinite;
     border-radius: 4px;
-    height: 1em; /* Tinggi baris */
-    margin: 0.5em 0; /* Margin untuk spasi antar baris */
+    height: 1em;
+    /* Tinggi baris */
+    margin: 0.5em 0;
+    /* Margin untuk spasi antar baris */
 }
 
 @keyframes skeleton-loading {
     0% {
         background-position: 200% center;
     }
+
     100% {
         background-position: -200% center;
     }
@@ -160,7 +165,8 @@ pre {
     border-radius: 50%;
     -webkit-tap-highlight-color: transparent;
 }
-.chat-input  #send-button {
+
+.chat-input #send-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,4 +187,24 @@ pre {
     font-size: 1.5rem;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+}
+
+#header-drawer-button>#drawer-open {
+    display: block
+}
+
+#header-drawer-button>#drawer-close {
+    display: none
+}
+
+#header-drawer-button.open>#drawer-open {
+    display: none
+}
+
+#header-drawer-button.open>#drawer-close {
+    display: block
+}
+
+#drawer.open {
+    height: 100%
 }
