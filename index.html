@@ -26,32 +26,44 @@
                     <div class="buttons">
                         <button id="header-drawer-button" aria-label="Toggle drawer open and closed"
                             class="flex xl:hidden size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-white/20 stroke-current hover:stroke-white ">
-                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-open" class="size-full stroke-current" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z" stroke-width="0.5" stroke="currentColor"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-close" class="size-full stroke-current" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.758 17.243L12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-open" class="size-full stroke-current"
+                                width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"
+                                    stroke-width="0.5" stroke="currentColor" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-close" class="size-full stroke-current"
+                                width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6.758 17.243L12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243" />
+                            </svg>
                         </button>
                     </div>
                     <div>
-                    <a href="/"
-                        class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
-                        <h2>ARCHAI</h2>
-                    </a>
-                    <select id="modelSelect" class="outline-0 text-xs font-normal">
-                        <option value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</option>
-                        <option value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">DeepSeek-R1-Distill-Llama-70B</option>
-                        <option value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</option>
-                        <option value="gpt-4" selected>GPT-4</option>
-                        <option value="gpt-4o">GPT-4o</option>
-                        <option value="gpt-4o-mini">GPT-4o-Mini</option>
-                        <option value="google/gemini-flash-1.5">Gemini-1.5-Flash</option>
-                        <option value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</option>
-                        <option value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</option>
-                        <option value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</option>
-                        <option value="meta-llama/Meta-Llama-3.1-8B-Instruct">Meta-Llama-3.1-8B-Instruct</option>
-                        <option value="meta-llama/Meta-Llama-3.1-70B-Instruct">Meta-Llama-3.1-70B-Instruct</option>
-                        <option value="meta-llama/Meta-Llama-3.1-405B-Instruct">Meta-Llama-3.1-405B-Instruct</option>
-                    </select>
+                        <a href="/"
+                            class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
+                            <h2>ARCHAI</h2>
+                        </a>
+                        <select id="modelSelect" class="outline-0 text-xs font-normal">
+                            <option value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</option>
+                            <option value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">DeepSeek-R1-Distill-Llama-70B
+                            </option>
+                            <option value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</option>
+                            <option value="gpt-4" selected>GPT-4</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                            <option value="gpt-4o-mini">GPT-4o-Mini</option>
+                            <option value="google/gemini-flash-1.5">Gemini-1.5-Flash</option>
+                            <option value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</option>
+                            <option value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</option>
+                            <option value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</option>
+                            <option value="meta-llama/Meta-Llama-3.1-8B-Instruct">Meta-Llama-3.1-8B-Instruct</option>
+                            <option value="meta-llama/Meta-Llama-3.1-70B-Instruct">Meta-Llama-3.1-70B-Instruct</option>
+                            <option value="meta-llama/Meta-Llama-3.1-405B-Instruct">Meta-Llama-3.1-405B-Instruct
+                            </option>
+                        </select>
+                    </div>
                 </div>
-            </div>
                 <div class="">
                     <nav
                         class="flex items-center justify-center text-sm gap-4 font-semibold text-l-on-base dark:text-d-on-base">
@@ -77,13 +89,14 @@
         </div>
     </header>
     <div id="drawer"
-        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
+        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-l-base/80 dark:bg-d-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
         <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
             <a href="/ai"
                 class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">ChatBot
             </a>
             <a href="/ai/sstocode"
-                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Screenshot to Code
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Screenshot
+                to Code
             </a>
         </nav>
     </div>
@@ -93,21 +106,32 @@
                 <div class="w-full">
                     <ul class="chatBox px-5 mb-20 flex flex-col gap-4">
                         <div class="flex justify-center items-center gap-2 text-2xl font-bold h-[60vh]" id="welcome">
-                            <h2 class="text-center flex">hello, &nbsp;<span contenteditable="true" class="outline-0 me-1">stranger</span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14 3v2H5v14h14v-9h2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm5.94.354l.707.707a.5.5 0 0 1 0 .707L11.314 14.1l-1.992.98a.3.3 0 0 1-.402-.402l.98-1.992l9.333-9.333a.5.5 0 0 1 .707 0z" stroke-width="0.5" stroke="currentColor"/></svg></h2>
+                            <h2 class="text-center flex">hello, &nbsp;<span contenteditable="true"
+                                    class="outline-0 me-1">stranger</span><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="14" height="14" viewBox="0 0 24 24">
+                                    <path fill="currentColor" fill-rule="evenodd"
+                                        d="M14 3v2H5v14h14v-9h2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm5.94.354l.707.707a.5.5 0 0 1 0 .707L11.314 14.1l-1.992.98a.3.3 0 0 1-.402-.402l.98-1.992l9.333-9.333a.5.5 0 0 1 .707 0z"
+                                        stroke-width="0.5" stroke="currentColor" />
+                                </svg></h2>
                         </div>
                     </ul>
                 </div>
             </div>
             <div
                 class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15%">
-                <div id="image-container" class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
+                <div id="image-container"
+                    class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
                     <div class="flex items-center gap-2">
-                        <img src="" alt="image" id="image" class="max-w-14 max-h-14 object-cover rounded">
+                        <img src="#" alt="image" id="image" class="max-w-14 max-h-14 object-cover rounded">
                         <p class="text-xs" id="image-status"></p>
                     </div>
                     <div>
                         <button onclick="removeImage()" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l2.9 2.9q.275.275.7.275t.7-.275t.275-.7t-.275-.7L13.4 12l2.9-2.9q.275-.275.275-.7t-.275-.7t-.7-.275t-.7.275L12 10.6L9.1 7.7q-.275-.275-.7-.275t-.7.275t-.275.7t.275.7l2.9 2.9l-2.9 2.9q-.275.275-.275.7t.275.7t.7.275t.7-.275zm0 8.6q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8" stroke-width="0.5" stroke="currentColor"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m12 13.4l2.9 2.9q.275.275.7.275t.7-.275t.275-.7t-.275-.7L13.4 12l2.9-2.9q.275-.275.275-.7t-.275-.7t-.7-.275t-.7.275L12 10.6L9.1 7.7q-.275-.275-.7-.275t-.7.275t-.275.7t.275.7l2.9 2.9l-2.9 2.9q-.275.275-.275.7t.275.7t.7.275t.7-.275zm0 8.6q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"
+                                    stroke-width="0.5" stroke="currentColor" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -126,7 +150,8 @@
                             <!-- Hidden file input -->
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </form>
-                        <textarea type="text" id="message" class="placeholder:text-current/50 text-d-base dark:text-l-base"
+                        <textarea type="text" id="message"
+                            class="placeholder:text-current/50 text-d-base dark:text-l-base"
                             placeholder="Masukkan pertanyaanmu disini..." required=""></textarea>
                     </div>
                     <i id="send-button"

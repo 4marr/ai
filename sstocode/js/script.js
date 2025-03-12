@@ -155,7 +155,6 @@ async function generate() {
         const data = await response.json();
         console.log(data);
         document.querySelector(".div-skeleton").remove();
-        // Mendapatkan elemen dengan id "result" yang sudah ada di HTML
         let messageElement = document.getElementById("result");
 
         // Membuat elemen <pre> dan <code>
@@ -163,20 +162,41 @@ async function generate() {
         let codeContainer = document.createElement("code");
         let imgContainer = document.createElement("img");
         let headerResult = document.createElement("h2");
-        imgContainer.src = data.result.previewImage
-        headerResult.innerHTML = "Image Preview"
+        let codePreviewText = document.createElement("span");
+        let copyButton = document.createElement("button");
+        let previewContainer = document.createElement("div");
+
+        imgContainer.src = data.result.previewImage;
+        headerResult.innerHTML = "Image Preview";
         headerResult.classList.add("text-lg", "font-semibold", "mb-2");
         codeContainer.classList.add("language-html");
-        codeContainer.id = "code"
-        codeContainer.textContent = messageElement.innerHTML; // Atau gunakan .textContent untuk teks biasa
+        codeContainer.id = "code";
+        codeContainer.textContent = data.result.code;
+
+        codePreviewText.innerHTML = "Code preview";
+        codePreviewText.classList.add("text-lg", "font-semibold", "mb-2", "mr-2");
+
+        copyButton.innerHTML = "Copy";
+        copyButton.classList.add("copy-button", "ml-2", "px-2", "py-1", "border", "border-gray-400", "text-current", "rounded-lg");
+        copyButton.addEventListener("click", () => {
+            navigator.clipboard.writeText(data.result.code).then(() => {
+                alert("Code copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy code: ", err);
+            });
+        });
+
+        previewContainer.classList.add("flex", "items-center", "justify-between", "mb-2", "mt-4");
+        previewContainer.appendChild(codePreviewText);
+        previewContainer.appendChild(copyButton);
+
         preContainer.appendChild(codeContainer);
         messageElement.appendChild(headerResult);
         messageElement.appendChild(imgContainer);
+        messageElement.appendChild(previewContainer);
         messageElement.appendChild(preContainer);
-        let resultCode = data.result.code;
-        let code = document.getElementById("code")
+
         Prism.highlightAll();
-        typeText(code, resultCode);
     } catch (error) {
         console.error('Error:', error);
         document.querySelector(".div-skeleton").remove();

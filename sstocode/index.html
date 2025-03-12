@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/custom.css">
 
     <!-- Link CSS untuk PrismJS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css" rel="stylesheet" />
+     <link rel="stylesheet" href="css/prism-onedark.css">
 
     <!-- Link JS untuk PrismJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
@@ -49,8 +49,9 @@
                     </div>
                     <div>
                         <a href="/"
-                            class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
+                            class="flex flex-col text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
                             <h2>ARCHAI</h2>
+                            <p class="text-xs font-normal">Screenshot to Code</p>
                         </a>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
         </div>
     </header>
     <div id="drawer"
-        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
+        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-l-base/80 dark:bg-d-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
         <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
             <a href="/ai"
                 class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">ChatBot
@@ -107,7 +108,7 @@
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                         class="font-semibold">Click to upload</span> or drag and drop</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                    800x400px)</p>
+                                    10mb)</p>
                             </div>
                             <input id="dropzone-file" type="file" class="hidden" />
                         </label>
@@ -130,7 +131,7 @@
                     </div>
                     <div class="mt-4">
                         <button onclick="generate()"
-                            class="py-2 flex justify-center w-full rounded-xl border border-gray-400 dark:border-gray-400 transition-all duration-300 hover:text-l-base hover:bg-slate-800 dark:hover:bg-gray-100 dark:hover:text-d-base">Generate</button>
+                            class="py-2 cursor-pointer flex justify-center w-full rounded-xl border border-gray-400 dark:border-gray-400 transition-all duration-300 hover:text-l-base hover:bg-slate-800 dark:hover:bg-gray-100 dark:hover:text-d-base">Generate</button>
                     </div>
                     <div id="result" class="relative mt-7">
                         <code id="code"></code>
