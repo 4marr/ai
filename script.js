@@ -272,7 +272,7 @@ let generateResponse = (incomingChatLi) => {
 
     if (selectedModel === "gpt-4o-mini") {
         // Endpoint dan method untuk model gpt-4o-mini
-        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-mini?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -306,7 +306,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4o") {
         // Endpoint dan method untuk model gpt-4o
-        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -340,7 +340,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "gpt-4") {
         // Endpoint dan method untuk model gpt-4
-        const API_URL = `https://fastrestapis.fasturl.link/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4?ask=${encodeURIComponent(userMessage)}&sessionId=${randomString}`;
 
         fetch(API_URL, {
             method: 'GET',
@@ -374,13 +374,13 @@ let generateResponse = (incomingChatLi) => {
             );
     } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-8b-exp" || selectedModel === "google/gemini-flash-1.5") {
         console.log("haiya");
-        let API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+        let API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
         const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
         if (uploadedImageUrl) {
-            API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&imageUrl=${uploadedImageUrl}&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+            API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&imageUrl=${uploadedImageUrl}&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
             localStorage.removeItem("uploadedImageUrl");
         } else {
-            API_URL = `https://fastrestapis.fasturl.link/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
+            API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
         }
         fetch(API_URL, {
             method: 'GET',
@@ -413,7 +413,7 @@ let generateResponse = (incomingChatLi) => {
                 }
             );
     } else if (selectedModel === "meta-llama/Meta-Llama-3.1-8B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-70B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-405B-Instruct") {
-        const API_URL = "https://fastrestapis.fasturl.link/aillm/llama";
+        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/llama";
         const payload = {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
@@ -469,7 +469,7 @@ let generateResponse = (incomingChatLi) => {
             );
     } else {
         // Endpoint dan method untuk model lainnya
-        const API_URL = "https://fastrestapis.fasturl.link/aillm/deepseek";
+        const API_URL = "https://fastrestapis.fasturl.cloud/aillm/deepseek";
         const payload = {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
