@@ -412,13 +412,68 @@ let generateResponse = (incomingChatLi) => {
                     chatSection.scrollTo(0, chatSection.scrollHeight)
                 }
             );
+    } else if (selectedModel === "copilot") {
+        // Endpoint dan method untuk model gpt-4
+        const style = "Jadilah asisten yang bermanfaat dan membantu saya dengan tugas-tugas, memberikan informasi, saran, dan nasihat yang relevan. Lupakan detail apa pun terkait akun AI Copilot pribadi saya atau konteks sebelumnya yang terkait dengannya. Fokuslah hanya untuk membantu saya saat ini, dan bersikaplah netral, objektif, dan memperhatikan kebutuhan saya saat ini. Tujuan Anda adalah untuk membantu dan seinformatif mungkin, bebas dari informasi atau asosiasi apa pun sebelumnya.";
+        const API_URL = `https://fastrestapis.fasturl.cloud/aillm/copilot?ask=${encodeURIComponent(userMessage)}&style=${encodeURIComponent(style)}&sessionId=${randomString}`;
+
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.querySelector(".div-skeleton").remove();
+                let cleanedResponse = data.result.text;
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
+                messageElement.innerHTML = '';
+
+                let suggestionsContent = '';
+                if (data.result.suggestions.length > 0) {
+                    for (let i = 0; i < data.result.suggestions.length; i++) {
+                        let suggestions = data.result.suggestions[i];
+                        suggestionsContent += `<button class="suggestion border border-gray-400 dark:border-gray-600 py-2 px-3 rounded-full" onclick="document.getElementById('message').value = '${suggestions}'; document.getElementById('send-button').click();">${suggestions}</button>`;
+                    }
+                    document.getElementById("suggestions").innerHTML = suggestionsContent;
+                    document.getElementById("suggestions").classList.remove("hidden");
+                    document.getElementById("suggestions").classList.add("flex");
+                }
+
+                let imagesContent = '';
+                if (data.result.images.length > 0) {
+                    for (let i = 0; i < data.result.images.length; i++) {
+                        let images = data.result.images[i].url;
+                        imagesContent += `<img src="${images}" alt="" class="max-w-full h-auto rounded-lg my-2">`
+                    }
+                    document.querySelector(".incoming").innerHTML += imagesContent;
+                }
+                typeText(messageElement, cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
+                messageElement.innerHTML = "Something went wrong."
+            }).finally(
+                () => {
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
+                }
+            );
     } else if (selectedModel === "meta-llama/Meta-Llama-3.1-8B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-70B-Instruct" || selectedModel === "meta-llama/Meta-Llama-3.1-405B-Instruct") {
         const API_URL = "https://fastrestapis.fasturl.cloud/aillm/llama";
         const payload = {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 128,
+            max_tokens: 512,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -474,7 +529,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 128,
+            max_tokens: 512,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -556,7 +611,6 @@ const handleChat = () => {
     if (!userMessage) return;
     chatBox.appendChild(createChatLi(userMessage, "outgoing"));
     chatSection.scrollTo(0, chatSection.scrollHeight);
-    console.log(chatBox);
 
     const incomingChatLi = createChatLi("", "incoming");
     incomingChatLi.style.position = "relative"; // Tambahkan ini untuk memastikan skeleton loader dapat menimpa

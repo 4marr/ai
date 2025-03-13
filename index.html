@@ -53,6 +53,7 @@
                             <option value="gpt-4" selected>GPT-4</option>
                             <option value="gpt-4o">GPT-4o</option>
                             <option value="gpt-4o-mini">GPT-4o-Mini</option>
+                            <option value="copilot">Copilot</option>
                             <option value="google/gemini-flash-1.5">Gemini-1.5-Flash</option>
                             <option value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</option>
                             <option value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</option>
@@ -118,7 +119,7 @@
                 </div>
             </div>
             <div
-                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15%">
+                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15% max-w-2xl overflow-hidden">
                 <div id="image-container"
                     class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
                     <div class="flex items-center gap-2">
@@ -133,6 +134,10 @@
                                     stroke-width="0.5" stroke="currentColor" />
                             </svg>
                         </button>
+                    </div>
+                </div>
+                <div id="suggest-container" class="mx-5 w-full overflow-hidden">
+                    <div id="suggestions" class="hidden gap-2 py-2 whitespace-nowrap overflow-scroll">
                     </div>
                 </div>
                 <div class="chat-input">
@@ -152,7 +157,7 @@
                         </form>
                         <textarea type="text" id="message"
                             class="placeholder:text-current/50 text-d-base dark:text-l-base"
-                            placeholder="Masukkan pertanyaanmu disini..." required=""></textarea>
+                            placeholder="Tanya apapun" required=""></textarea>
                     </div>
                     <i id="send-button"
                         class="bx bx-up-arrow-alt bg-d-base text-l-base dark:bg-l-base dark:text-d-base"></i>
@@ -162,7 +167,7 @@
                         ARCHAI dapat membuat kesalahan. Verifikasi informasi penting. Produdly created by
                         <a href="https://ammaricano.my.id" class="underline">ammaricano</a>
                         and Powered by
-                        <a href="https://tailwindcss.com" class="underline">TailwindCSS</a>
+                        <a href="https://fastrestapis.fasturl.cloud/" class="underline">FastRestApis</a>
                     </p>
                 </div>
             </div>
