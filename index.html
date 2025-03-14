@@ -45,24 +45,7 @@
                             class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
                             <h2>ARCHAI</h2>
                         </a>
-                        <select id="modelSelect" class="outline-0 text-xs font-normal">
-                            <option value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</option>
-                            <option value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">DeepSeek-R1-Distill-Llama-70B
-                            </option>
-                            <option value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</option>
-                            <option value="gpt-4" selected>GPT-4</option>
-                            <option value="gpt-4o">GPT-4o</option>
-                            <option value="gpt-4o-mini">GPT-4o-Mini</option>
-                            <option value="copilot">Copilot</option>
-                            <option value="google/gemini-flash-1.5">Gemini-1.5-Flash</option>
-                            <option value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</option>
-                            <option value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</option>
-                            <option value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</option>
-                            <option value="meta-llama/Meta-Llama-3.1-8B-Instruct">Meta-Llama-3.1-8B-Instruct</option>
-                            <option value="meta-llama/Meta-Llama-3.1-70B-Instruct">Meta-Llama-3.1-70B-Instruct</option>
-                            <option value="meta-llama/Meta-Llama-3.1-405B-Instruct">Meta-Llama-3.1-405B-Instruct
-                            </option>
-                        </select>
+                        <button id="model-button" class="flex text-xs font-normal">models</button>
                     </div>
                 </div>
                 <div class="">
@@ -101,8 +84,8 @@
             </a>
         </nav>
     </div>
-    <main class="overflow-hidden">
-        <section class="chatSection flex items-center justify-center overflow-y-auto">
+    <main class="flex items-center justify-center overflow-hidden">
+        <section class="chatSection w-screen max-w-2xl flex items-center justify-center overflow-y-auto">
             <div class="flex w-full mt-20 h-[85vh]">
                 <div class="w-full">
                     <ul class="chatBox px-5 mb-20 flex flex-col gap-4">
@@ -118,8 +101,85 @@
                     </ul>
                 </div>
             </div>
+            <div id="model"
+                class="fixed w-full -bottom-full z-30 h-1/2 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-slate-200 rounded-t-2xl dark:bg-slate-900 transition-all duration-300 ease-in-out">
+                <div id="model-list" class="w-full flex flex-col gap-4 py-10 px-5 overflow-y-scroll">
+                    <div>
+                        <p class="text-xs font-bold">Copilot</p>
+                        <div class="flex flex-col gap-2">
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="copilot">Copilot</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Deepseek</p>
+                        <div class="flex flex-col gap-2">
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">
+                                DeepSeek-R1-Distill-Llama-70B</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Google Gemini</p>
+                        <div class="flex flex-col gap-2">
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="google/gemini-flash-1.5">Gemini-1.5-Flash</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">GPT OpenAI</p>
+                        <div class="flex flex-col gap-2">
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100 selected"
+                                data-value="gpt-4">GPT-4</button>
+                            <!-- GPT-4 sebagai default -->
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="gpt-4o">GPT-4o</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="gpt-4o-mini">GPT-4o-Mini</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Meta Llama</p>
+                        <div class="flex flex-col gap-2">
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="meta-llama/Meta-Llama-3.1-8B-Instruct">
+                                Meta-Llama-3.1-8B-Instruct</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="meta-llama/Meta-Llama-3.1-70B-Instruct">
+                                Meta-Llama-3.1-70B-Instruct</button>
+                            <button
+                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                data-value="meta-llama/Meta-Llama-3.1-405B-Instruct">
+                                Meta-Llama-3.1-405B-Instruct</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div
-                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15% max-w-2xl overflow-hidden">
+                class="fixed bottom-0 bg-gradient-to-b from-l-base/0 to-l-base dark:from-d-base/0 dark:to-d-base from-0% to-15% w-screen max-w-2xl overflow-hidden">
                 <div id="image-container"
                     class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
                     <div class="flex items-center gap-2">
@@ -136,8 +196,8 @@
                         </button>
                     </div>
                 </div>
-                <div id="suggest-container" class="mx-5 w-full overflow-hidden">
-                    <div id="suggestions" class="hidden gap-2 py-2 whitespace-nowrap overflow-scroll">
+                <div id="suggest-container" class="flex items-center justify-center px-5 w-full overflow-hidden">
+                    <div id="suggestions" class="hidden gap-2 whitespace-nowrap overflow-scroll">
                     </div>
                 </div>
                 <div class="chat-input">
@@ -156,8 +216,8 @@
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </form>
                         <textarea type="text" id="message"
-                            class="placeholder:text-current/50 text-d-base dark:text-l-base"
-                            placeholder="Tanya apapun" required=""></textarea>
+                            class="placeholder:text-current/50 text-d-base dark:text-l-base" placeholder="Tanya apapun"
+                            required=""></textarea>
                     </div>
                     <i id="send-button"
                         class="bx bx-up-arrow-alt bg-d-base text-l-base dark:bg-l-base dark:text-d-base"></i>

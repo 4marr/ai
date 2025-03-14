@@ -6,6 +6,85 @@ drawerButton.addEventListener('click', function () {
     drawerButton.classList.toggle('open');
 });
 
+let chatId = null;
+let currentModel = "gpt-4";  // Inisialisasi model default (GPT-4)
+let randomString = Math.random().toString(36).substring(7);  // Inisialisasi randomString
+
+const model = document.getElementById("model");
+const modelOptions = model.querySelectorAll(".model-option");
+const modelButton = document.getElementById("model-button");
+const imageUploadForm = document.getElementById("image-upload-form");
+
+// Menambahkan event listener untuk tiap pilihan
+modelOptions.forEach(option => {
+    option.addEventListener('click', function () {
+        const selectedModel = option.getAttribute("data-value");
+
+        if (selectedModel !== currentModel) {
+            // Hapus riwayat percakapan sebelumnya dari localStorage
+            localStorage.removeItem('conversationHistory');
+
+            // Update model yang dipilih
+            currentModel = selectedModel;
+
+            localStorage.setItem("selectedModel", selectedModel);
+
+            // Reset randomString saat model berubah
+            randomString = Math.random().toString(36).substring(7);
+
+            // Menampilkan nilai yang dipilih pada elemen tertentu (misalnya model-button)
+            modelButton.innerHTML = option.textContent + `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="rotate-180"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17 14l-5-5l-5 5"/></svg>`;
+
+            // Menandai pilihan yang aktif (menambahkan kelas 'selected' pada opsi yang dipilih)
+            modelOptions.forEach(opt => opt.classList.remove("selected"));
+            option.classList.add("selected");
+
+            // Menyembunyikan dropdown (jika diperlukan)
+            model.classList.remove('open');
+            modelButton.classList.remove('open');
+
+            console.log("Model selected:", selectedModel);  // Menampilkan model yang dipilih untuk debug
+
+            // Memeriksa apakah model yang dipilih memerlukan form upload gambar
+            if (selectedModel === "google/gemini-2.0-flash-001" ||
+                selectedModel === "google/gemini-flash-1.5-8b" ||
+                selectedModel === "google/gemini-flash-1.5-8b-exp" ||
+                selectedModel === "google/gemini-flash-1.5") {
+                imageUploadForm.style.display = "flex";  // Menampilkan form upload gambar
+            } else {
+                imageUploadForm.style.display = "none";  // Menyembunyikan form upload gambar
+            }
+        }
+    });
+});
+
+// Memastikan model default adalah GPT-4 ketika halaman dimuat
+document.addEventListener("DOMContentLoaded", function () {
+    const selectedModel = localStorage.getItem("selectedModel") || "gpt-4";  // Ambil model dari localStorage atau default "gpt-4"
+    const defaultOption = model.querySelector(`[data-value="${selectedModel}"]`);
+    if (defaultOption) {
+        modelButton.innerHTML = defaultOption.textContent + `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="rotate-180"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17 14l-5-5l-5 5"/></svg>`;
+        defaultOption.classList.add("selected");
+    }
+});
+
+modelButton.addEventListener('click', function () {
+    model.classList.toggle('open');
+    modelButton.classList.toggle('open');
+});
+
+// Menambahkan event listener untuk menutup model jika klik di luar model
+document.addEventListener('click', function (event) {
+    const isClickInsideModel = model.contains(event.target);
+    const isClickOnModelButton = modelButton.contains(event.target);
+
+    // Jika klik di luar model dan tombol model, tutup model
+    if (!isClickInsideModel && !isClickOnModelButton) {
+        model.classList.remove('open');
+        modelButton.classList.remove('open');
+    }
+});
+
 const textareas = document.getElementById('message');
 const sendButton = document.getElementById('send-button');
 
@@ -147,20 +226,6 @@ const createChatLi = (message, className) => {
     return chatLi;
 }
 
-let chatId = null;
-let currentModel = document.getElementById("modelSelect").value;
-let randomString = Math.random().toString(36).substring(7); // Inisialisasi randomString sekali
-
-document.getElementById("modelSelect").addEventListener("change", () => {
-    const selectedModel = document.getElementById("modelSelect").value;
-    if (selectedModel !== currentModel) {
-        // Hapus riwayat percakapan sebelumnya
-        localStorage.removeItem('conversationHistory');
-        currentModel = selectedModel;
-        randomString = Math.random().toString(36).substring(7); // Reset randomString saat model berubah
-    }
-});
-
 document.getElementById("image-upload").addEventListener("change", async () => {
     const fileInput = document.getElementById("image-upload");
     const file = fileInput.files[0];
@@ -171,8 +236,6 @@ document.getElementById("image-upload").addEventListener("change", async () => {
     imageContainer.classList.add("flex");
     image.src = URL.createObjectURL(file);
     imageStatus.textContent = "loading to upload...";
-    console.log("hai");
-
 
     // Langsung melakukan try-catch jika file terpilih
     if (file) {
@@ -215,24 +278,6 @@ function removeImage() {
     imageContainer.classList.add("hidden");
 }
 
-let modelSelect = document.getElementById("modelSelect");
-
-modelSelect.addEventListener("change", () => {
-    const selectedModel = modelSelect.value;  // Ambil nilai yang dipilih dari dropdown
-
-    console.log("Model selected:", selectedModel);  // Menampilkan model yang dipilih untuk debug
-
-    if (selectedModel === "google/gemini-2.0-flash-001" ||
-        selectedModel === "google/gemini-flash-1.5-8b" ||
-        selectedModel === "google/gemini-flash-1.5-8b-exp" ||
-        selectedModel === "google/gemini-flash-1.5") {
-
-        document.getElementById("image-upload-form").style.display = "flex";  // Menampilkan form upload gambar
-    } else {
-        document.getElementById("image-upload-form").style.display = "none";
-    }
-});
-
 let generateResponse = (incomingChatLi) => {
     let imageContainer = document.getElementById("image-container");
     imageContainer.classList.remove("flex");
@@ -268,7 +313,7 @@ let generateResponse = (incomingChatLi) => {
     addMessageToHistory("user", userMessage);
 
     // Dapatkan model yang dipilih dari elemen select
-    const selectedModel = document.getElementById("modelSelect").value;
+    const selectedModel = localStorage.getItem("selectedModel")
 
     if (selectedModel === "gpt-4o-mini") {
         // Endpoint dan method untuk model gpt-4o-mini
@@ -373,7 +418,6 @@ let generateResponse = (incomingChatLi) => {
                 }
             );
     } else if (selectedModel === "google/gemini-2.0-flash-001" || selectedModel === "google/gemini-flash-1.5-8b" || selectedModel === "google/gemini-flash-1.5-8b-exp" || selectedModel === "google/gemini-flash-1.5") {
-        console.log("haiya");
         let API_URL = `https://fastrestapis.fasturl.cloud/aillm/gemini?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}`;
         const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
         if (uploadedImageUrl) {
@@ -441,20 +485,21 @@ let generateResponse = (incomingChatLi) => {
                 if (data.result.suggestions.length > 0) {
                     for (let i = 0; i < data.result.suggestions.length; i++) {
                         let suggestions = data.result.suggestions[i];
-                        suggestionsContent += `<button class="suggestion border border-gray-400 dark:border-gray-600 py-2 px-3 rounded-full" onclick="document.getElementById('message').value = '${suggestions}'; document.getElementById('send-button').click();">${suggestions}</button>`;
+                        suggestionsContent += `<button class="suggestion text-xs bg-l-base/80 border border-gray-400 dark:border-gray-600 py-2 px-3 rounded-full" onclick="document.getElementById('message').value = '${suggestions}'; document.getElementById('send-button').click();">${suggestions}</button>`;
                     }
                     document.getElementById("suggestions").innerHTML = suggestionsContent;
                     document.getElementById("suggestions").classList.remove("hidden");
                     document.getElementById("suggestions").classList.add("flex");
                 }
 
-                let imagesContent = '';
                 if (data.result.images.length > 0) {
                     for (let i = 0; i < data.result.images.length; i++) {
                         let images = data.result.images[i].url;
-                        imagesContent += `<img src="${images}" alt="" class="max-w-full h-auto rounded-lg my-2">`
+                        let imgContainer = document.createElement("img");
+                        imgContainer.src = images;
+                        imgContainer.classList.add("rounded-lg", "mt-4", "max-w-3/4")
+                        document.querySelector(".incoming").appendChild(imgContainer)
                     }
-                    document.querySelector(".incoming").innerHTML += imagesContent;
                 }
                 typeText(messageElement, cleanedResponse);
             })
