@@ -588,7 +588,7 @@ let generateResponse = (incomingChatLi) => {
                         let imgContainer = document.createElement("img");
                         imgContainer.src = images;
                         imgContainer.classList.add("rounded-lg", "mt-4", "max-w-3/4")
-                        document.querySelector(".incoming").appendChild(imgContainer)
+                        cleanedResponse += imgContainer.outerHTML;
                     }
                 }
                 typeText(messageElement, cleanedResponse);
