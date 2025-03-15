@@ -60,7 +60,8 @@ modelOptions.forEach(option => {
 
 // Memastikan model default adalah GPT-4 ketika halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
-    const selectedModel = localStorage.getItem("selectedModel") || "gpt-4";  // Ambil model dari localStorage atau default "gpt-4"
+    const selectedModel = localStorage.getItem("selectedModel") || "gpt-4";
+    localStorage.setItem("selectedModel", selectedModel || "gpt-4");
     const defaultOption = model.querySelector(`[data-value="${selectedModel}"]`);
     if (defaultOption) {
         modelButton.innerHTML = defaultOption.textContent + `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="rotate-180"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17 14l-5-5l-5 5"/></svg>`;
@@ -279,6 +280,7 @@ function removeImage() {
 }
 
 let generateResponse = (incomingChatLi) => {
+    console.log(chatId);
     let imageContainer = document.getElementById("image-container");
     imageContainer.classList.remove("flex");
     imageContainer.classList.add("hidden");
@@ -518,7 +520,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 512,
+            max_tokens: 4096,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -574,7 +576,7 @@ let generateResponse = (incomingChatLi) => {
             id: chatId, // Gunakan id yang sama dari permintaan pertama
             model: selectedModel, // Gunakan model yang dipilih
             messages: conversationHistory.slice(-2), // Hanya ambil dua pesan terakhir
-            max_tokens: 512,
+            max_tokens: 4096,
             temperature: 0.3,
             presence_penalty: 0.1,
             frequency_penalty: 0.1,
@@ -633,7 +635,7 @@ let generateResponse = (incomingChatLi) => {
 }
 
 function typeText(element, text, delay = 20) {
-    chatBox.style.paddingBottom = "150px";
+    chatBox.style.paddingBottom = "100px";
     const words = text.split(' ');
     let index = 0;
     let currentHTML = ''; // Simpan HTML yang telah dimasukkan

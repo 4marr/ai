@@ -111,7 +111,8 @@ pre {
 .chatBox {
     width: 100%;
     overflow-y: auto;
-    padding-bottom: 150px;
+    margin-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 .chat-input {
@@ -219,8 +220,7 @@ pre {
 
 /* Menandai model yang dipilih dengan gaya khusus */
 .model-option.selected {
-    background-color: oklch(0.554 0.046 257.417);
-    color: #ffffff;
+    background-color: oklch(0.967 0.003 264.542);
     font-weight: bold; /* Membuat teks menjadi lebih tebal */
 }
 

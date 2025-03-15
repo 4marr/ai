@@ -84,11 +84,11 @@
             </a>
         </nav>
     </div>
-    <main class="flex items-center justify-center overflow-hidden">
+    <main class="flex items-center justify-center overflow-hidden mt-20">
         <section class="chatSection w-screen max-w-2xl flex items-center justify-center overflow-y-auto">
-            <div class="flex w-full mt-20 h-[85vh]">
+            <div class="flex w-full h-[80vh]">
                 <div class="w-full">
-                    <ul class="chatBox px-5 mb-20 flex flex-col gap-4">
+                    <ul class="chatBox px-5 flex flex-col gap-4">
                         <div class="flex justify-center items-center gap-2 text-2xl font-bold h-[60vh]" id="welcome">
                             <h2 class="text-center flex">hello, &nbsp;<span contenteditable="true"
                                     class="outline-0 me-1">stranger</span><svg xmlns="http://www.w3.org/2000/svg"
@@ -102,76 +102,76 @@
                 </div>
             </div>
             <div id="model"
-                class="fixed w-full -bottom-full z-30 h-1/2 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-slate-200 rounded-t-2xl dark:bg-slate-900 transition-all duration-300 ease-in-out">
-                <div id="model-list" class="w-full flex flex-col gap-4 py-10 px-5 overflow-y-scroll">
-                    <div>
+                class="fixed w-full -bottom-full z-50 h-1/2 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-white rounded-t-2xl dark:bg-slate-900 transition-all duration-500 ease">
+                <div id="model-list" class="w-full flex flex-col gap-4 py-10 overflow-y-scroll">
+                    <div class="px-5">
                         <p class="text-xs font-bold">Copilot</p>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col">
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="copilot">Copilot</button>
                         </div>
                     </div>
-                    <div>
+                    <div class="px-5">
                         <p class="text-xs font-bold">Deepseek</p>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col">
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">
                                 DeepSeek-R1-Distill-Llama-70B</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</button>
                         </div>
                     </div>
-                    <div>
+                    <div class="px-5">
                         <p class="text-xs font-bold">Google Gemini</p>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col">
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="google/gemini-flash-1.5">Gemini-1.5-Flash</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</button>
                         </div>
                     </div>
-                    <div>
+                    <div class="px-5">
                         <p class="text-xs font-bold">GPT OpenAI</p>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col">
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100 selected"
-                                data-value="gpt-4">GPT-4</button>
+                                class="model-option flex justify-between text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700 selected"
+                                data-value="gpt-4">GPT-4 <span class="bg-blue-200 text-blue-700 py-1 px-2 rounded-full text-[11px] font-normal">Recommended</span></button>
                             <!-- GPT-4 sebagai default -->
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="gpt-4o">GPT-4o</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="gpt-4o-mini">GPT-4o-Mini</button>
                         </div>
                     </div>
-                    <div>
+                    <div class="px-5">
                         <p class="text-xs font-bold">Meta Llama</p>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col">
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-8B-Instruct">
                                 Meta-Llama-3.1-8B-Instruct</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-70B-Instruct">
                                 Meta-Llama-3.1-70B-Instruct</button>
                             <button
-                                class="model-option text-start py-2 px-3 w-full bg-white rounded-lg hover:bg-gray-100"
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-405B-Instruct">
                                 Meta-Llama-3.1-405B-Instruct</button>
                         </div>
@@ -222,7 +222,7 @@
                     <i id="send-button"
                         class="bx bx-up-arrow-alt bg-d-base text-l-base dark:bg-l-base dark:text-d-base"></i>
                 </div>
-                <div class="text-center bottom-0 w-full px-5 pb-2">
+                <div class="text-center bottom-0 w-full px-5 py-2">
                     <p class="text-[0.60rem] text-d-base/75 dark:text-l-base/75">
                         ARCHAI dapat membuat kesalahan. Verifikasi informasi penting. Produdly created by
                         <a href="https://ammaricano.my.id" class="underline">ammaricano</a>
