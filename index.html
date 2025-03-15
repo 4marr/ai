@@ -41,10 +41,10 @@
                         </button>
                     </div>
                     <div>
-                        <a href="/"
+                        <h2
                             class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-lg">
                             <h2>ARCHAI</h2>
-                        </a>
+                        </h2>
                         <button id="model-button" class="flex text-xs font-normal">models</button>
                     </div>
                 </div>
@@ -117,14 +117,14 @@
                         <div class="flex flex-col">
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="deepseek-ai/DeepSeek-R1">DeepSeek-R1</button>
+                                data-value="deepseek-ai/DeepSeek-R1">DeepSeek R1</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="deepseek-ai/DeepSeek-R1-Distill-Llama-70B">
-                                DeepSeek-R1-Distill-Llama-70B</button>
+                                DeepSeek R1 Distill Llama 70B</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="deepseek-ai/DeepSeek-V3">DeepSeek-V3</button>
+                                data-value="deepseek-ai/DeepSeek-V3">DeepSeek V3</button>
                         </div>
                     </div>
                     <div class="px-5">
@@ -132,31 +132,35 @@
                         <div class="flex flex-col">
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="google/gemini-flash-1.5">Gemini-1.5-Flash</button>
+                                data-value="google/gemini-flash-1.5">Gemini 1.5 Flash</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="google/gemini-flash-1.5-8b-exp">Gemini-1.5-Flash-8b-exp</button>
+                                data-value="google/gemini-flash-1.5-8b">Gemini 1.5 Flash 8b</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="google/gemini-flash-1.5-8b">Gemini-1.5-Flash-8b</button>
+                                data-value="google/gemini-flash-1.5-8b-exp">Gemini 1.5 Flash 8b exp</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="google/gemini-2.0-flash-001">Gemini-2.0-Flash-001</button>
+                                data-value="google/gemini-2.0-flash-001">Gemini 2.0 Flash 001</button>
                         </div>
                     </div>
                     <div class="px-5">
                         <p class="text-xs font-bold">GPT OpenAI</p>
                         <div class="flex flex-col">
                             <button
-                                class="model-option flex justify-between text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700 selected"
-                                data-value="gpt-4">GPT-4 <span class="bg-blue-200 text-blue-700 py-1 px-2 rounded-full text-[11px] font-normal">Recommended</span></button>
+                                class="model-option flex items-center justify-between text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700 selected"
+                                data-value="gpt-4">GPT 4 <span
+                                    class="bg-blue-200 text-blue-700 py-1 px-2 rounded-full text-[11px] font-normal">Recommended</span></button>
                             <!-- GPT-4 sebagai default -->
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="gpt-4o">GPT-4o</button>
+                                data-value="gpt-4o">GPT 4o</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
-                                data-value="gpt-4o-mini">GPT-4o-Mini</button>
+                                data-value="gpt-4o-mini">GPT 4o Mini</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="gpt-4o-turbo">GPT 4o Turbo</button>
                         </div>
                     </div>
                     <div class="px-5">
@@ -165,15 +169,44 @@
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-8B-Instruct">
-                                Meta-Llama-3.1-8B-Instruct</button>
+                                Meta Llama 3.1 8B Instruct</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-70B-Instruct">
-                                Meta-Llama-3.1-70B-Instruct</button>
+                                Meta Llama 3.1 70B Instruct</button>
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="meta-llama/Meta-Llama-3.1-405B-Instruct">
-                                Meta-Llama-3.1-405B-Instruct</button>
+                                Meta Llama 3.1 405B Instruct</button>
+                        </div>
+                    </div>
+                    <div class="px-5">
+                        <p class="text-xs font-bold">Perplexity</p>
+                        <div class="flex flex-col">
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="r1-1776">
+                                r1-1776</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="sonar">
+                                Sonar</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="sonar-pro">
+                                Sonar Pro</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="sonar-reasoning">
+                                Sonar Reasoning</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="sonar-reasoning-pro">
+                                Sonar Reasoning Pro</button>
+                            <button
+                                class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
+                                data-value="sonar-deep-research">
+                                Sonar Deep Research</button>
                         </div>
                     </div>
                 </div>
@@ -224,7 +257,7 @@
                 </div>
                 <div class="text-center bottom-0 w-full px-5 py-2">
                     <p class="text-[0.60rem] text-d-base/75 dark:text-l-base/75">
-                        ARCHAI dapat membuat kesalahan. Verifikasi informasi penting. Produdly created by
+                        ARCHAI dapat membuat kesalahan. Verifikasi informasi penting. Produdly Created by
                         <a href="https://ammaricano.my.id" class="underline">ammaricano</a>
                         and Powered by
                         <a href="https://fastrestapis.fasturl.cloud/" class="underline">FastRestApis</a>

@@ -46,7 +46,8 @@ modelOptions.forEach(option => {
             console.log("Model selected:", selectedModel);  // Menampilkan model yang dipilih untuk debug
 
             // Memeriksa apakah model yang dipilih memerlukan form upload gambar
-            if (selectedModel === "google/gemini-2.0-flash-001" ||
+            if (selectedModel === "gpt-4o-turbo" ||
+                selectedModel === "google/gemini-2.0-flash-001" ||
                 selectedModel === "google/gemini-flash-1.5-8b" ||
                 selectedModel === "google/gemini-flash-1.5-8b-exp" ||
                 selectedModel === "google/gemini-flash-1.5") {
@@ -408,6 +409,93 @@ let generateResponse = (incomingChatLi) => {
                 // Ganti teks yang diawali oleh ### dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
                 messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
+                messageElement.innerHTML = "Something went wrong."
+            }).finally(
+                () => {
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
+                }
+            );
+    } else if (selectedModel === "gpt-4o-turbo") {
+        let API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-turbo?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&sessionId=${randomString}`;
+        const uploadedImageUrl = localStorage.getItem("uploadedImageUrl");
+        if (uploadedImageUrl) {
+            API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-turbo?ask=${encodeURIComponent(userMessage)}&imageUrl=${uploadedImageUrl}&style=Answer%20as%20a%20friendly%20assistant&sessionId=${randomString}`;
+            localStorage.removeItem("uploadedImageUrl");
+        } else {
+            API_URL = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o-turbo?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&sessionId=${randomString}`;
+        }
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.querySelector(".div-skeleton").remove();
+                let cleanedResponse = data.result.choices[0].message.content;
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
+                messageElement.innerHTML = '';
+                typeText(messageElement, cleanedResponse);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.querySelector(".div-skeleton").remove();
+                messageElement.innerHTML = "Something went wrong."
+            }).finally(
+                () => {
+                    chatSection.scrollTo(0, chatSection.scrollHeight)
+                }
+            );
+    } else if (selectedModel === "r1-1776" || selectedModel === "sonar" || selectedModel === "sonar-pro" || selectedModel === "sonar-reasoning-pro" || selectedModel === "sonar-deep-research") {
+        let API_URL = `https://fastrestapis.fasturl.cloud/aillm/perplexity?ask=${encodeURIComponent(userMessage)}&style=Answer%20as%20a%20friendly%20assistant&model=${encodeURIComponent(selectedModel)}&sessionId=${randomString}&temperature=0.5&maxTokens=4096`;
+        fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.querySelector(".div-skeleton").remove();
+                let cleanedResponse = data.result.response;
+                // Ganti teks yang diapit oleh ** dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Ganti teks yang diapit oleh ``` dengan tag <code>
+                cleanedResponse = cleanedResponse.replace(/```(.*?)```/gs, '<code>$1</code>');
+                // Ganti teks yang diawali oleh ### dengan tag <strong>
+                cleanedResponse = cleanedResponse.replace(/^###/, "<strong>").replace(/$/, "</strong>");
+                messageElement.innerHTML = '';
+                if (Array.isArray(data.result.citations) && data.result.citations.length > 0) {
+                    for (let i = 0; i < data.result.citations.length; i++) {
+                        let citations = data.result.citations[i];
+                        let citationsContainer = document.createElement("a");
+                        citationsContainer.href = citations;
+                        citationsContainer.innerHTML = citations;
+                        citationsContainer.classList.add("mt-4", "text-blue-700");
+
+                        // Tambahkan \n di depan hanya untuk elemen pertama
+                        if (i === 0) {
+                            cleanedResponse += "\n\n" + citationsContainer.outerHTML;
+                        } else {
+                            cleanedResponse += citationsContainer.outerHTML + "\n\n";
+                        }
+                    }
+                }
                 typeText(messageElement, cleanedResponse);
             })
             .catch(error => {
