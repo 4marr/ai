@@ -495,6 +495,7 @@ let generateResponse = (incomingChatLi) => {
                             cleanedResponse += citationsContainer.outerHTML + "\n\n";
                         }
                     }
+                    data.result.citations = [];
                 }
                 typeText(messageElement, cleanedResponse);
             })
@@ -590,6 +591,7 @@ let generateResponse = (incomingChatLi) => {
                         imgContainer.classList.add("rounded-lg", "mt-4", "max-w-3/4")
                         cleanedResponse += imgContainer.outerHTML;
                     }
+                    data.result.images = [];
                 }
                 typeText(messageElement, cleanedResponse);
             })
