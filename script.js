@@ -68,6 +68,16 @@ document.addEventListener("DOMContentLoaded", function () {
         modelButton.innerHTML = defaultOption.textContent + `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="rotate-180"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17 14l-5-5l-5 5"/></svg>`;
         defaultOption.classList.add("selected");
     }
+
+    if (selectedModel === "gpt-4o-turbo" ||
+        selectedModel === "google/gemini-2.0-flash-001" ||
+        selectedModel === "google/gemini-flash-1.5-8b" ||
+        selectedModel === "google/gemini-flash-1.5-8b-exp" ||
+        selectedModel === "google/gemini-flash-1.5") {
+        imageUploadForm.style.display = "flex";  // Menampilkan form upload gambar
+    } else {
+        imageUploadForm.style.display = "none";  // Menyembunyikan form upload gambar
+    }
 });
 
 modelButton.addEventListener('click', function () {
@@ -295,7 +305,7 @@ let generateResponse = (incomingChatLi) => {
     chatSection.scrollTo(0, chatSection.scrollHeight)
 
     let skeleton = `
-            <div class="div-skeleton h-full absolute top-0 left-0">
+            <div class="div-skeleton h-full g">
                 <div class="skeleton" style="width: 90%;"></div>
                 <div class="skeleton" style="width: 75%;"></div>
                 <div class="skeleton" style="width: 80%;"></div>

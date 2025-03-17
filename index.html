@@ -73,7 +73,7 @@
         </div>
     </header>
     <div id="drawer"
-        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-l-base/80 dark:bg-d-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
+        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center bg-l-base/80 dark:bg-d-base/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
         <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
             <a href="/ai"
                 class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">ChatBot
@@ -102,17 +102,17 @@
                 </div>
             </div>
             <div id="model"
-                class="fixed w-full -bottom-full z-50 h-1/2 overflow-hidden flex flex-col items-center justify-center lg:hidden bg-white rounded-t-2xl dark:bg-slate-900 transition-all duration-500 ease">
-                <div id="model-list" class="w-full flex flex-col gap-4 py-10 my-4 overflow-y-scroll">
-                    <div class="px-5">
-                        <p class="text-xs font-bold">Copilot</p>
+                class="fixed w-full -bottom-full z-50 h-1/2 overflow-hidden flex flex-col items-center justify-center bg-white rounded-t-2xl dark:bg-slate-900 transition-all duration-500 ease">
+                <div id="model-list" class="w-full flex flex-col gap-4 py-5 my-4 overflow-y-scroll">
+                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                        <p class="flex items-center justify-between text-xs font-bold">Copilot <span class="text-blue-700">Generate Image</span></p>
                         <div class="flex flex-col">
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
                                 data-value="copilot">Copilot</button>
                         </div>
                     </div>
-                    <div class="px-5">
+                    <div class="px-5 pb-2 border-b-4 border-gray-100">
                         <p class="text-xs font-bold">Deepseek</p>
                         <div class="flex flex-col">
                             <button
@@ -127,8 +127,8 @@
                                 data-value="deepseek-ai/DeepSeek-V3">DeepSeek V3</button>
                         </div>
                     </div>
-                    <div class="px-5">
-                        <p class="text-xs font-bold">Google Gemini</p>
+                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                        <p class="flex items-center justify-between text-xs font-bold">Google Gemini <span class="text-blue-700">Supports send pictures</span></p>
                         <div class="flex flex-col">
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
@@ -144,13 +144,12 @@
                                 data-value="google/gemini-2.0-flash-001">Gemini 2.0 Flash 001</button>
                         </div>
                     </div>
-                    <div class="px-5">
+                    <div class="px-5 pb-2 border-b-4 border-gray-100">
                         <p class="text-xs font-bold">GPT OpenAI</p>
                         <div class="flex flex-col">
                             <button
                                 class="model-option flex items-center justify-between text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700 selected"
-                                data-value="gpt-4">GPT 4 <span
-                                    class="bg-blue-200 text-blue-700 py-1 px-2 rounded-full text-[11px] font-normal">Recommended</span></button>
+                                data-value="gpt-4">GPT 4</button>
                             <!-- GPT-4 sebagai default -->
                             <button
                                 class="model-option text-start py-2 px-10 w-full text-sm hover:bg-gray-100 dark:hover:bg-slate-700"
@@ -163,7 +162,7 @@
                                 data-value="gpt-4o-turbo">GPT 4o Turbo</button>
                         </div>
                     </div>
-                    <div class="px-5">
+                    <div class="px-5 pb-2 border-b-4 border-gray-100">
                         <p class="text-xs font-bold">Meta Llama</p>
                         <div class="flex flex-col">
                             <button
