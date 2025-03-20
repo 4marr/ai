@@ -204,16 +204,12 @@ preloadTheme()
 
 
 var textarea = document.getElementById('message');
-textarea.addEventListener("input", e => {
-    textarea.style.height = "50px";
-    var height = e.target.scrollHeight;
-    textarea.style.height = height + 'px';
+textarea.addEventListener("input", function() {
+    let height = this.scrollHeight;
+    console.log(height);
 
-    if (height > 70) {
-        document.getElementById('message-container').style.borderRadius = "15px";
-    } else {
-        document.getElementById('message-container').style.borderRadius = "30px";
-    }
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
 })
 
 let chatInput = document.querySelector(".chat-input textarea");
@@ -298,8 +294,6 @@ let generateResponse = (incomingChatLi) => {
     document.getElementById("welcome").classList.add("hidden");
     const messageElement = incomingChatLi.querySelector("p");
     var textarea = document.getElementById('message');
-    textarea.style.height = "50px";
-    document.getElementById('message-container').style.borderRadius = "30px";
 
     chatBox.style.paddingBottom = "250px";
     chatSection.scrollTo(0, chatSection.scrollHeight)

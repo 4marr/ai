@@ -10,5 +10,7 @@
     --color-avocado-600: oklch(0.53 0.12 118.34);
     --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
     --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+    --shadow-top: 0 -20px 40px 0 rgba(239, 241, 245, 1);
+    --shadow-top-dark: 0 -20px 40px 0 rgba(17, 18, 21, 1);
     /* ... */
   }
