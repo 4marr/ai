@@ -204,10 +204,7 @@ preloadTheme()
 
 
 var textarea = document.getElementById('message');
-textarea.addEventListener("input", function() {
-    let height = this.scrollHeight;
-    console.log(height);
-
+textarea.addEventListener("input", function () {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
 })
@@ -292,6 +289,8 @@ let generateResponse = (incomingChatLi) => {
     imageContainer.classList.remove("flex");
     imageContainer.classList.add("hidden");
     document.getElementById("welcome").classList.add("hidden");
+    document.getElementById("suggestions").classList.remove("hidden");
+    document.getElementById("suggestions").classList.add("flex");
     const messageElement = incomingChatLi.querySelector("p");
     var textarea = document.getElementById('message');
 
@@ -580,7 +579,7 @@ let generateResponse = (incomingChatLi) => {
                 if (data.result.suggestions.length > 0) {
                     for (let i = 0; i < data.result.suggestions.length; i++) {
                         let suggestions = data.result.suggestions[i];
-                        suggestionsContent += `<button class="suggestion text-xs bg-l-base/80 border border-gray-400 dark:border-gray-600 py-2 px-3 rounded-full" onclick="document.getElementById('message').value = '${suggestions}'; document.getElementById('send-button').click();">${suggestions}</button>`;
+                        suggestionsContent += `<button class="suggestion text-xs bg-l-base border border-gray-400 dark:border-gray-600 py-2 px-3 rounded-full" onclick="document.getElementById('message').value = '${suggestions}'; document.getElementById('send-button').click();">${suggestions}</button>`;
                     }
                     document.getElementById("suggestions").innerHTML = suggestionsContent;
                     document.getElementById("suggestions").classList.remove("hidden");
@@ -729,7 +728,7 @@ let generateResponse = (incomingChatLi) => {
 }
 
 function typeText(element, text, delay = 20) {
-    chatBox.style.paddingBottom = "100px";
+    chatBox.style.paddingBottom = "150px";
     const words = text.split(' ');
     let index = 0;
     let currentHTML = ''; // Simpan HTML yang telah dimasukkan

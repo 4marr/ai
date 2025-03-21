@@ -14,7 +14,6 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Material+Symbols+Outlined: opsz, wght, FILL, GRAD@48,400,0,0" />
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/custom.css">
@@ -106,7 +105,7 @@
             <div id="model"
                 class="fixed w-full -bottom-full z-50 h-1/2 overflow-hidden flex flex-col items-center justify-center bg-white rounded-t-2xl dark:bg-slate-900 transition-all duration-500 ease">
                 <div id="model-list" class="w-full flex flex-col gap-4 py-5 my-4 overflow-y-scroll">
-                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                    <div class="px-5 pb-2 border-b-2 border-gray-100">
                         <p class="flex items-center justify-between text-xs font-bold">Copilot <span
                                 class="text-blue-700">Generate Image</span></p>
                         <div class="flex flex-col">
@@ -115,7 +114,7 @@
                                 data-value="copilot">Copilot</button>
                         </div>
                     </div>
-                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                    <div class="px-5 pb-2 border-b-2 border-gray-100">
                         <p class="text-xs font-bold">Deepseek</p>
                         <div class="flex flex-col">
                             <button
@@ -130,7 +129,7 @@
                                 data-value="deepseek-ai/DeepSeek-V3">DeepSeek V3</button>
                         </div>
                     </div>
-                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                    <div class="px-5 pb-2 border-b-2 border-gray-100">
                         <p class="flex items-center justify-between text-xs font-bold">Google Gemini <span
                                 class="text-blue-700">Supports send pictures</span></p>
                         <div class="flex flex-col">
@@ -148,7 +147,7 @@
                                 data-value="google/gemini-2.0-flash-001">Gemini 2.0 Flash 001</button>
                         </div>
                     </div>
-                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                    <div class="px-5 pb-2 border-b-2 border-gray-100">
                         <p class="text-xs font-bold">GPT OpenAI</p>
                         <div class="flex flex-col">
                             <button
@@ -166,7 +165,7 @@
                                 data-value="gpt-4o-turbo">GPT 4o Turbo</button>
                         </div>
                     </div>
-                    <div class="px-5 pb-2 border-b-4 border-gray-100">
+                    <div class="px-5 pb-2 border-b-2 border-gray-100">
                         <p class="text-xs font-bold">Meta Llama</p>
                         <div class="flex flex-col">
                             <button
@@ -217,7 +216,7 @@
             <div
                 class="fixed bottom-0 bg-l-base dark:bg-d-base w-screen max-w-2xl overflow-hidden shadow-top dark:shadow-top-dark">
                 <div id="image-container"
-                    class="hidden justify-between items-center gap-4 py-2 px-4 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
+                    class="hidden justify-between items-center gap-4 py-2 px-4 mb-2 rounded-lg bg-gray-200 dark:bg-gray-800 mx-5">
                     <div class="flex items-center gap-2">
                         <img src="#" alt="image" id="image" class="max-w-14 max-h-14 object-cover rounded">
                         <p class="text-xs" id="image-status"></p>
@@ -252,7 +251,7 @@
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </form>
                         <textarea type="text" id="message"
-                            class="text-d-base dark:text-l-base transition-all ease duration-300" placeholder="Tanya apapun"
+                            class="text-d-base dark:text-l-base" placeholder="Tanya apapun"
                             required=""></textarea>
                     </div>
                     <i id="send-button"
