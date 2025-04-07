@@ -294,7 +294,7 @@ let generateResponse = (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
     var textarea = document.getElementById('message');
 
-    chatBox.style.paddingBottom = "250px";
+    chatBox.style.paddingBottom = "200px";
     chatSection.scrollTo(0, chatSection.scrollHeight)
 
     let skeleton = `
@@ -531,7 +531,7 @@ let generateResponse = (incomingChatLi) => {
             .then(data => {
                 console.log(data);
                 document.querySelector(".div-skeleton").remove();
-                let cleanedResponse = data.result.choices[0].message.content;
+                let cleanedResponse = data.result;
                 // Ganti teks yang diapit oleh ** dengan tag <strong>
                 cleanedResponse = cleanedResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 // Ganti teks yang diapit oleh ``` dengan tag <code>
@@ -728,7 +728,6 @@ let generateResponse = (incomingChatLi) => {
 }
 
 function typeText(element, text, delay = 20) {
-    chatBox.style.paddingBottom = "150px";
     const words = text.split(' ');
     let index = 0;
     let currentHTML = ''; // Simpan HTML yang telah dimasukkan
